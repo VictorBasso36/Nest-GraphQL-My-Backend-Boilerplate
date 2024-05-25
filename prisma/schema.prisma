@@ -5,7 +5,6 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  // previewFeatures = []
 }
 
 generator dbml {
@@ -13,26 +12,51 @@ generator dbml {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  email     String   @unique
-  password  String
-  firstname String?
-  lastname  String?
-  posts     Post[]
-  role      Role
+  id                   String    @id @default(cuid())
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  email                String    @unique
+  password             String
+  firstname            String?
+  lastname             String?
+  Company              Company?  @relation(fields: [companyId], references: [id])
+  role                 Role
+  resetPasswordToken   String?   @unique
+  resetPasswordExpires DateTime?
+  companyId            String?
 }
 
-model Post {
+model Company {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  cnpj      String    @unique
+  location  String
+  name      String
+  rating    String
+  User      User[]
+  Comment   Comment[]
+}
+
+model Comment {
+  id              String            @id @default(cuid())
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  content         String
+  rating          Int               @default(0)
+  approved        Boolean           @default(false)
+  companyId       String
+  Company         Company           @relation(fields: [companyId], references: [id])
+  CommentResponse CommentResponse[]
+}
+
+model CommentResponse {
   id        String   @id @default(cuid())
+  CommentId String
+  Comment   Comment  @relation(fields: [CommentId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  published Boolean
-  title     String
-  content   String?
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  String?
+  content   String
 }
 
 enum Role {
