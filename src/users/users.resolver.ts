@@ -11,7 +11,7 @@ import { BadRequestException, UseGuards } from '@nestjs/common';
 import { UserEntity } from '../common/decorators/user.decorator';
 import { GqlAuthGuard } from '../auth/gql-auth.guard';
 import { UsersService } from './users.service';
-import { User } from './models/user.model';
+import { User } from '../@generated/user/user.model';
 import { ChangePasswordInput } from './dto/change-password.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { ForgotPasswordInput, ForgotPasswordResponse } from './dto/forgot-password.input';

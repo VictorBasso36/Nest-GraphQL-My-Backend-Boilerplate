@@ -5,10 +5,18 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
-generator dbml {
-  provider = "prisma-dbml-generator"
+// generator dbml {
+//   provider = "prisma-dbml-generator"
+// }
+
+generator nestgraphql {
+    provider = "node node_modules/prisma-nestjs-graphql"
+    // for yarn monorepos
+    // provider = "prisma-nestjs-graphql"
+    output = "../src/@generated"
 }
 
 model User {

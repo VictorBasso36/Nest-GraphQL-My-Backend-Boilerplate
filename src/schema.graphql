@@ -11,15 +11,173 @@ type Auth {
   user: User!
 }
 
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
 input ChangePasswordInput {
   newPassword: String!
   oldPassword: String!
+}
+
+type Comment {
+  CommentResponse: [CommentResponse!]
+  Company: Company!
+  _count: CommentCount!
+  approved: Boolean!
+  companyId: String!
+  content: String!
+  createdAt: DateTime!
+  id: ID!
+  rating: Int!
+  updatedAt: DateTime!
+}
+
+type CommentCount {
+  CommentResponse: Int!
+}
+
+input CommentListRelationFilter {
+  every: CommentWhereInput
+  none: CommentWhereInput
+  some: CommentWhereInput
+}
+
+input CommentRelationFilter {
+  is: CommentWhereInput
+  isNot: CommentWhereInput
+}
+
+type CommentResponse {
+  Comment: Comment!
+  CommentId: String!
+  content: String!
+  createdAt: DateTime!
+  id: ID!
+  updatedAt: DateTime!
+}
+
+input CommentResponseListRelationFilter {
+  every: CommentResponseWhereInput
+  none: CommentResponseWhereInput
+  some: CommentResponseWhereInput
+}
+
+input CommentResponseWhereInput {
+  AND: [CommentResponseWhereInput!]
+  Comment: CommentRelationFilter
+  CommentId: StringFilter
+  NOT: [CommentResponseWhereInput!]
+  OR: [CommentResponseWhereInput!]
+  content: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input CommentWhereInput {
+  AND: [CommentWhereInput!]
+  CommentResponse: CommentResponseListRelationFilter
+  Company: CompanyRelationFilter
+  NOT: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  approved: BoolFilter
+  companyId: StringFilter
+  content: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  rating: IntFilter
+  updatedAt: DateTimeFilter
+}
+
+type Company {
+  Comment: [Comment!]
+  User: [User!]
+  _count: CompanyCount!
+  cnpj: String!
+  createdAt: DateTime!
+  id: ID!
+  location: String!
+  name: String!
+  rating: String!
+  updatedAt: DateTime!
+}
+
+type CompanyCount {
+  Comment: Int!
+  User: Int!
+}
+
+input CompanyNullableRelationFilter {
+  is: CompanyWhereInput
+  isNot: CompanyWhereInput
+}
+
+input CompanyRelationFilter {
+  is: CompanyWhereInput
+  isNot: CompanyWhereInput
+}
+
+input CompanyWhereInput {
+  AND: [CompanyWhereInput!]
+  Comment: CommentListRelationFilter
+  NOT: [CompanyWhereInput!]
+  OR: [CompanyWhereInput!]
+  User: UserListRelationFilter
+  cnpj: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  location: StringFilter
+  name: StringFilter
+  rating: StringFilter
+  updatedAt: DateTimeFilter
 }
 
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input EnumRoleFilter {
+  equals: Role
+  in: [Role!]
+  not: NestedEnumRoleFilter
+  notIn: [Role!]
+}
+
+input IntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
 
 """
 A field whose value is a JSON Web Token (JWT): https://jwt.io/introduction.
@@ -39,13 +197,91 @@ type Mutation {
   updateUser(data: UpdateUserInput!): User!
 }
 
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input NestedEnumRoleFilter {
+  equals: Role
+  in: [Role!]
+  not: NestedEnumRoleFilter
+  notIn: [Role!]
+}
+
+input NestedIntFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntFilter
+  notIn: [Int!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
 type Query {
+  companys(where: CompanyWhereInput!): [Company!]!
   hello(name: String!): String!
   helloWorld: String!
   me: User!
 }
 
-"""User role"""
+enum QueryMode {
+  default
+  insensitive
+}
+
 enum Role {
   ADMIN
   USER
@@ -56,6 +292,36 @@ input SignupInput {
   firstname: String
   lastname: String
   password: String!
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
 }
 
 type Token {
@@ -72,14 +338,40 @@ input UpdateUserInput {
 }
 
 type User {
-  """Identifies the date and time when the object was created."""
+  Company: Company
+  companyId: String
   createdAt: DateTime!
   email: String!
   firstname: String
   id: ID!
   lastname: String
+  password: String!
+  resetPasswordExpires: DateTime
+  resetPasswordToken: String
   role: Role!
-
-  """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime!
+}
+
+input UserListRelationFilter {
+  every: UserWhereInput
+  none: UserWhereInput
+  some: UserWhereInput
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  Company: CompanyNullableRelationFilter
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  companyId: StringNullableFilter
+  createdAt: DateTimeFilter
+  email: StringFilter
+  firstname: StringNullableFilter
+  id: StringFilter
+  lastname: StringNullableFilter
+  password: StringFilter
+  resetPasswordExpires: DateTimeNullableFilter
+  resetPasswordToken: StringNullableFilter
+  role: EnumRoleFilter
+  updatedAt: DateTimeFilter
 }
