@@ -1,6 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
-import { Int } from '@nestjs/graphql';
+import { Float } from '@nestjs/graphql';
 import { CommentCountAggregate } from './comment-count-aggregate.output';
 import { CommentAvgAggregate } from './comment-avg-aggregate.output';
 import { CommentSumAggregate } from './comment-sum-aggregate.output';
@@ -22,8 +22,8 @@ export class CommentGroupBy {
     @Field(() => String, {nullable:false})
     content!: string;
 
-    @Field(() => Int, {nullable:false})
-    rating!: number;
+    @Field(() => Float, {nullable:true})
+    rating?: number;
 
     @Field(() => Boolean, {nullable:false})
     approved!: boolean;

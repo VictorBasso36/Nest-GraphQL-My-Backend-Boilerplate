@@ -24,6 +24,9 @@ export class CompanyCountAggregate {
     name!: number;
 
     @Field(() => Int, {nullable:false})
+    ratingCount!: number;
+
+    @Field(() => Int, {nullable:false})
     rating!: number;
 
     @Field(() => Int, {nullable:false})

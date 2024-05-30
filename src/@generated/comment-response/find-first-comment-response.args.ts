@@ -2,7 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
 import { CommentResponseWhereInput } from './comment-response-where.input';
 import { Type } from 'class-transformer';
-import { CommentResponseOrderByWithRelationInput } from './comment-response-order-by-with-relation.input';
+import { CommentResponseOrderByWithRelationAndSearchRelevanceInput } from './comment-response-order-by-with-relation-and-search-relevance.input';
 import { Prisma } from '@prisma/client';
 import { CommentResponseWhereUniqueInput } from './comment-response-where-unique.input';
 import { Int } from '@nestjs/graphql';
@@ -15,8 +15,8 @@ export class FindFirstCommentResponseArgs {
     @Type(() => CommentResponseWhereInput)
     where?: CommentResponseWhereInput;
 
-    @Field(() => [CommentResponseOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<CommentResponseOrderByWithRelationInput>;
+    @Field(() => [CommentResponseOrderByWithRelationAndSearchRelevanceInput], {nullable:true})
+    orderBy?: Array<CommentResponseOrderByWithRelationAndSearchRelevanceInput>;
 
     @Field(() => CommentResponseWhereUniqueInput, {nullable:true})
     cursor?: Prisma.AtLeast<CommentResponseWhereUniqueInput, 'id'>;

@@ -7,6 +7,7 @@ export enum CompanyScalarFieldEnum {
     cnpj = "cnpj",
     location = "location",
     name = "name",
+    ratingCount = "ratingCount",
     rating = "rating"
 }
 

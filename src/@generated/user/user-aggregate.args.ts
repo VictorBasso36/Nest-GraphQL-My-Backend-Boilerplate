@@ -2,7 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { ArgsType } from '@nestjs/graphql';
 import { UserWhereInput } from './user-where.input';
 import { Type } from 'class-transformer';
-import { UserOrderByWithRelationInput } from './user-order-by-with-relation.input';
+import { UserOrderByWithRelationAndSearchRelevanceInput } from './user-order-by-with-relation-and-search-relevance.input';
 import { Prisma } from '@prisma/client';
 import { UserWhereUniqueInput } from './user-where-unique.input';
 import { Int } from '@nestjs/graphql';
@@ -17,8 +17,8 @@ export class UserAggregateArgs {
     @Type(() => UserWhereInput)
     where?: UserWhereInput;
 
-    @Field(() => [UserOrderByWithRelationInput], {nullable:true})
-    orderBy?: Array<UserOrderByWithRelationInput>;
+    @Field(() => [UserOrderByWithRelationAndSearchRelevanceInput], {nullable:true})
+    orderBy?: Array<UserOrderByWithRelationAndSearchRelevanceInput>;
 
     @Field(() => UserWhereUniqueInput, {nullable:true})
     cursor?: Prisma.AtLeast<UserWhereUniqueInput, 'id' | 'email' | 'resetPasswordToken'>;

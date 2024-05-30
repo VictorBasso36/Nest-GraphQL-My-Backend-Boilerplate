@@ -23,5 +23,8 @@ export class CompanyMaxAggregateInput {
     name?: true;
 
     @Field(() => Boolean, {nullable:true})
+    ratingCount?: true;
+
+    @Field(() => Boolean, {nullable:true})
     rating?: true;
 }

@@ -2,6 +2,8 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../prisma/string-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
+import { IntNullableFilter } from '../prisma/int-nullable-filter.input';
+import { FloatNullableFilter } from '../prisma/float-nullable-filter.input';
 import { UserListRelationFilter } from '../user/user-list-relation-filter.input';
 import { CommentListRelationFilter } from '../comment/comment-list-relation-filter.input';
 
@@ -35,8 +37,11 @@ export class CompanyWhereInput {
     @Field(() => StringFilter, {nullable:true})
     name?: StringFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    rating?: StringFilter;
+    @Field(() => IntNullableFilter, {nullable:true})
+    ratingCount?: IntNullableFilter;
+
+    @Field(() => FloatNullableFilter, {nullable:true})
+    rating?: FloatNullableFilter;
 
     @Field(() => UserListRelationFilter, {nullable:true})
     User?: UserListRelationFilter;

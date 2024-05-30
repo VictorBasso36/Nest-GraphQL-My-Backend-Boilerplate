@@ -1,5 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
+import { Int } from '@nestjs/graphql';
+import { Float } from '@nestjs/graphql';
 import { CommentCreateNestedManyWithoutCompanyInput } from '../comment/comment-create-nested-many-without-company.input';
 
 @InputType()
@@ -23,8 +25,11 @@ export class CompanyCreateWithoutUserInput {
     @Field(() => String, {nullable:false})
     name!: string;
 
-    @Field(() => String, {nullable:false})
-    rating!: string;
+    @Field(() => Int, {nullable:true})
+    ratingCount?: number;
+
+    @Field(() => Float, {nullable:true})
+    rating?: number;
 
     @Field(() => CommentCreateNestedManyWithoutCompanyInput, {nullable:true})
     Comment?: CommentCreateNestedManyWithoutCompanyInput;

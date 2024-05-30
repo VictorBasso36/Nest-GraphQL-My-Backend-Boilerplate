@@ -1,6 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
-import { Int } from '@nestjs/graphql';
+import { Float } from '@nestjs/graphql';
 
 @InputType()
 export class CommentUncheckedCreateWithoutCommentResponseInput {
@@ -17,7 +17,7 @@ export class CommentUncheckedCreateWithoutCommentResponseInput {
     @Field(() => String, {nullable:false})
     content!: string;
 
-    @Field(() => Int, {nullable:true})
+    @Field(() => Float, {nullable:true})
     rating?: number;
 
     @Field(() => Boolean, {nullable:true})

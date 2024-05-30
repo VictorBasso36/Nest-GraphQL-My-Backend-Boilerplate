@@ -3,7 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
 
 @InputType()
-export class IntFieldUpdateOperationsInput {
+export class NullableIntFieldUpdateOperationsInput {
 
     @Field(() => Int, {nullable:true})
     set?: number;

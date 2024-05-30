@@ -1,6 +1,8 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
+import { Int } from '@nestjs/graphql';
+import { Float } from '@nestjs/graphql';
 import { User } from '../user/user.model';
 import { Comment } from '../comment/comment.model';
 import { CompanyCount } from './company-count.output';
@@ -26,8 +28,11 @@ export class Company {
     @Field(() => String, {nullable:false})
     name!: string;
 
-    @Field(() => String, {nullable:false})
-    rating!: string;
+    @Field(() => Int, {nullable:true,defaultValue:0})
+    ratingCount!: number | null;
+
+    @Field(() => Float, {nullable:true})
+    rating!: number | null;
 
     @Field(() => [User], {nullable:true})
     User?: Array<User>;

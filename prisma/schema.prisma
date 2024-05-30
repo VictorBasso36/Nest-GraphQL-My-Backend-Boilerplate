@@ -4,19 +4,19 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
 }
 
-// generator dbml {
-//   provider = "prisma-dbml-generator"
-// }
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
 
 generator nestgraphql {
-    provider = "node node_modules/prisma-nestjs-graphql"
-    // for yarn monorepos
-    // provider = "prisma-nestjs-graphql"
-    output = "../src/@generated"
+  provider = "node node_modules/prisma-nestjs-graphql"
+  // for yarn monorepos
+  // provider = "prisma-nestjs-graphql"
+  output   = "../src/@generated"
 }
 
 model User {
@@ -35,15 +35,16 @@ model User {
 }
 
 model Company {
-  id        String    @id @default(cuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  cnpj      String    @unique
-  location  String
-  name      String
-  rating    String
-  User      User[]
-  Comment   Comment[]
+  id          String    @id @default(cuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  cnpj        String    @unique
+  location    String
+  name        String
+  ratingCount Int?      @default(0)
+  rating      Float?
+  User        User[]
+  Comment     Comment[]
 }
 
 model Comment {
@@ -51,7 +52,7 @@ model Comment {
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   content         String
-  rating          Int               @default(0)
+  rating          Float?
   approved        Boolean           @default(false)
   companyId       String
   Company         Company           @relation(fields: [companyId], references: [id])

@@ -7,6 +7,8 @@ import { CompanyScalarFieldEnum } from './company-scalar-field.enum';
 import { CompanyScalarWhereWithAggregatesInput } from './company-scalar-where-with-aggregates.input';
 import { Int } from '@nestjs/graphql';
 import { CompanyCountAggregateInput } from './company-count-aggregate.input';
+import { CompanyAvgAggregateInput } from './company-avg-aggregate.input';
+import { CompanySumAggregateInput } from './company-sum-aggregate.input';
 import { CompanyMinAggregateInput } from './company-min-aggregate.input';
 import { CompanyMaxAggregateInput } from './company-max-aggregate.input';
 
@@ -34,6 +36,12 @@ export class CompanyGroupByArgs {
 
     @Field(() => CompanyCountAggregateInput, {nullable:true})
     _count?: CompanyCountAggregateInput;
+
+    @Field(() => CompanyAvgAggregateInput, {nullable:true})
+    _avg?: CompanyAvgAggregateInput;
+
+    @Field(() => CompanySumAggregateInput, {nullable:true})
+    _sum?: CompanySumAggregateInput;
 
     @Field(() => CompanyMinAggregateInput, {nullable:true})
     _min?: CompanyMinAggregateInput;

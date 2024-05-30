@@ -24,5 +24,8 @@ export class CompanyCountOrderByAggregateInput {
     name?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    ratingCount?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     rating?: keyof typeof SortOrder;
 }

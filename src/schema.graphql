@@ -30,7 +30,7 @@ type Comment {
   content: String!
   createdAt: DateTime!
   id: ID!
-  rating: Int!
+  rating: Float
   updatedAt: DateTime!
 }
 
@@ -38,10 +38,50 @@ type CommentCount {
   CommentResponse: Int!
 }
 
+input CommentCreateManyCompanyInput {
+  approved: Boolean
+  content: String!
+  createdAt: DateTime
+  id: String
+  rating: Float
+  updatedAt: DateTime
+}
+
+input CommentCreateManyCompanyInputEnvelope {
+  data: [CommentCreateManyCompanyInput!]!
+  skipDuplicates: Boolean
+}
+
+input CommentCreateNestedManyWithoutCompanyInput {
+  connect: [CommentWhereUniqueInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutCompanyInput!]
+  create: [CommentCreateWithoutCompanyInput!]
+  createMany: CommentCreateManyCompanyInputEnvelope
+}
+
+input CommentCreateOrConnectWithoutCompanyInput {
+  create: CommentCreateWithoutCompanyInput!
+  where: CommentWhereUniqueInput!
+}
+
+input CommentCreateWithoutCompanyInput {
+  CommentResponse: CommentResponseCreateNestedManyWithoutCommentInput
+  approved: Boolean
+  content: String!
+  createdAt: DateTime
+  id: String
+  rating: Float
+  updatedAt: DateTime
+}
+
 input CommentListRelationFilter {
   every: CommentWhereInput
   none: CommentWhereInput
   some: CommentWhereInput
+}
+
+input CommentOrderByRelationAggregateInput {
+  _count: SortOrder
 }
 
 input CommentRelationFilter {
@@ -56,6 +96,37 @@ type CommentResponse {
   createdAt: DateTime!
   id: ID!
   updatedAt: DateTime!
+}
+
+input CommentResponseCreateManyCommentInput {
+  content: String!
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
+}
+
+input CommentResponseCreateManyCommentInputEnvelope {
+  data: [CommentResponseCreateManyCommentInput!]!
+  skipDuplicates: Boolean
+}
+
+input CommentResponseCreateNestedManyWithoutCommentInput {
+  connect: [CommentResponseWhereUniqueInput!]
+  connectOrCreate: [CommentResponseCreateOrConnectWithoutCommentInput!]
+  create: [CommentResponseCreateWithoutCommentInput!]
+  createMany: CommentResponseCreateManyCommentInputEnvelope
+}
+
+input CommentResponseCreateOrConnectWithoutCommentInput {
+  create: CommentResponseCreateWithoutCommentInput!
+  where: CommentResponseWhereUniqueInput!
+}
+
+input CommentResponseCreateWithoutCommentInput {
+  content: String!
+  createdAt: DateTime
+  id: String
+  updatedAt: DateTime
 }
 
 input CommentResponseListRelationFilter {
@@ -76,6 +147,18 @@ input CommentResponseWhereInput {
   updatedAt: DateTimeFilter
 }
 
+input CommentResponseWhereUniqueInput {
+  AND: [CommentResponseWhereInput!]
+  Comment: CommentRelationFilter
+  CommentId: StringFilter
+  NOT: [CommentResponseWhereInput!]
+  OR: [CommentResponseWhereInput!]
+  content: StringFilter
+  createdAt: DateTimeFilter
+  id: String
+  updatedAt: DateTimeFilter
+}
+
 input CommentWhereInput {
   AND: [CommentWhereInput!]
   CommentResponse: CommentResponseListRelationFilter
@@ -87,7 +170,22 @@ input CommentWhereInput {
   content: StringFilter
   createdAt: DateTimeFilter
   id: StringFilter
-  rating: IntFilter
+  rating: FloatNullableFilter
+  updatedAt: DateTimeFilter
+}
+
+input CommentWhereUniqueInput {
+  AND: [CommentWhereInput!]
+  CommentResponse: CommentResponseListRelationFilter
+  Company: CompanyRelationFilter
+  NOT: [CommentWhereInput!]
+  OR: [CommentWhereInput!]
+  approved: BoolFilter
+  companyId: StringFilter
+  content: StringFilter
+  createdAt: DateTimeFilter
+  id: String
+  rating: FloatNullableFilter
   updatedAt: DateTimeFilter
 }
 
@@ -100,7 +198,8 @@ type Company {
   id: ID!
   location: String!
   name: String!
-  rating: String!
+  rating: Float
+  ratingCount: Int
   updatedAt: DateTime!
 }
 
@@ -109,14 +208,65 @@ type CompanyCount {
   User: Int!
 }
 
+input CompanyCreateInput {
+  Comment: CommentCreateNestedManyWithoutCompanyInput
+  User: UserCreateNestedManyWithoutCompanyInput
+  cnpj: String!
+  createdAt: DateTime
+  id: String
+  location: String!
+  name: String!
+  rating: Float
+  ratingCount: Int
+  updatedAt: DateTime
+}
+
 input CompanyNullableRelationFilter {
   is: CompanyWhereInput
   isNot: CompanyWhereInput
 }
 
+enum CompanyOrderByRelevanceFieldEnum {
+  cnpj
+  id
+  location
+  name
+}
+
+input CompanyOrderByRelevanceInput {
+  fields: [CompanyOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input CompanyOrderByWithRelationAndSearchRelevanceInput {
+  Comment: CommentOrderByRelationAggregateInput
+  User: UserOrderByRelationAggregateInput
+  _relevance: CompanyOrderByRelevanceInput
+  cnpj: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  location: SortOrder
+  name: SortOrder
+  rating: SortOrderInput
+  ratingCount: SortOrderInput
+  updatedAt: SortOrder
+}
+
 input CompanyRelationFilter {
   is: CompanyWhereInput
   isNot: CompanyWhereInput
+}
+
+enum CompanyScalarFieldEnum {
+  cnpj
+  createdAt
+  id
+  location
+  name
+  rating
+  ratingCount
+  updatedAt
 }
 
 input CompanyWhereInput {
@@ -130,7 +280,24 @@ input CompanyWhereInput {
   id: StringFilter
   location: StringFilter
   name: StringFilter
-  rating: StringFilter
+  rating: FloatNullableFilter
+  ratingCount: IntNullableFilter
+  updatedAt: DateTimeFilter
+}
+
+input CompanyWhereUniqueInput {
+  AND: [CompanyWhereInput!]
+  Comment: CommentListRelationFilter
+  NOT: [CompanyWhereInput!]
+  OR: [CompanyWhereInput!]
+  User: UserListRelationFilter
+  cnpj: String
+  createdAt: DateTimeFilter
+  id: String
+  location: StringFilter
+  name: StringFilter
+  rating: FloatNullableFilter
+  ratingCount: IntNullableFilter
   updatedAt: DateTimeFilter
 }
 
@@ -168,14 +335,25 @@ input EnumRoleFilter {
   notIn: [Role!]
 }
 
-input IntFilter {
+input FloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
+  notIn: [Float!]
+}
+
+input IntNullableFilter {
   equals: Int
   gt: Int
   gte: Int
   in: [Int!]
   lt: Int
   lte: Int
-  not: NestedIntFilter
+  not: NestedIntNullableFilter
   notIn: [Int!]
 }
 
@@ -191,6 +369,7 @@ input LoginInput {
 
 type Mutation {
   changePassword(data: ChangePasswordInput!): User!
+  createCompany(data: CompanyCreateInput!): Company!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
   signup(data: SignupInput!): Auth!
@@ -231,14 +410,25 @@ input NestedEnumRoleFilter {
   notIn: [Role!]
 }
 
-input NestedIntFilter {
+input NestedFloatNullableFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatNullableFilter
+  notIn: [Float!]
+}
+
+input NestedIntNullableFilter {
   equals: Int
   gt: Int
   gte: Int
   in: [Int!]
   lt: Int
   lte: Int
-  not: NestedIntFilter
+  not: NestedIntNullableFilter
   notIn: [Int!]
 }
 
@@ -253,6 +443,7 @@ input NestedStringFilter {
   lte: String
   not: NestedStringFilter
   notIn: [String!]
+  search: String
   startsWith: String
 }
 
@@ -267,11 +458,18 @@ input NestedStringNullableFilter {
   lte: String
   not: NestedStringNullableFilter
   notIn: [String!]
+  search: String
   startsWith: String
 }
 
+enum NullsOrder {
+  first
+  last
+}
+
 type Query {
-  companys(where: CompanyWhereInput!): [Company!]!
+  companys(cursor: CompanyWhereUniqueInput, distinct: [CompanyScalarFieldEnum!], orderBy: [CompanyOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CompanyWhereInput): [Company!]
+  findUniqueCompany(where: CompanyWhereUniqueInput!): Company
   hello(name: String!): String!
   helloWorld: String!
   me: User!
@@ -294,6 +492,16 @@ input SignupInput {
   password: String!
 }
 
+enum SortOrder {
+  asc
+  desc
+}
+
+input SortOrderInput {
+  nulls: NullsOrder
+  sort: SortOrder!
+}
+
 input StringFilter {
   contains: String
   endsWith: String
@@ -306,6 +514,7 @@ input StringFilter {
   mode: QueryMode
   not: NestedStringFilter
   notIn: [String!]
+  search: String
   startsWith: String
 }
 
@@ -321,6 +530,7 @@ input StringNullableFilter {
   mode: QueryMode
   not: NestedStringNullableFilter
   notIn: [String!]
+  search: String
   startsWith: String
 }
 
@@ -352,10 +562,57 @@ type User {
   updatedAt: DateTime!
 }
 
+input UserCreateManyCompanyInput {
+  createdAt: DateTime
+  email: String!
+  firstname: String
+  id: String
+  lastname: String
+  password: String!
+  resetPasswordExpires: DateTime
+  resetPasswordToken: String
+  role: Role!
+  updatedAt: DateTime
+}
+
+input UserCreateManyCompanyInputEnvelope {
+  data: [UserCreateManyCompanyInput!]!
+  skipDuplicates: Boolean
+}
+
+input UserCreateNestedManyWithoutCompanyInput {
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutCompanyInput!]
+  create: [UserCreateWithoutCompanyInput!]
+  createMany: UserCreateManyCompanyInputEnvelope
+}
+
+input UserCreateOrConnectWithoutCompanyInput {
+  create: UserCreateWithoutCompanyInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateWithoutCompanyInput {
+  createdAt: DateTime
+  email: String!
+  firstname: String
+  id: String
+  lastname: String
+  password: String!
+  resetPasswordExpires: DateTime
+  resetPasswordToken: String
+  role: Role!
+  updatedAt: DateTime
+}
+
 input UserListRelationFilter {
   every: UserWhereInput
   none: UserWhereInput
   some: UserWhereInput
+}
+
+input UserOrderByRelationAggregateInput {
+  _count: SortOrder
 }
 
 input UserWhereInput {
@@ -372,6 +629,24 @@ input UserWhereInput {
   password: StringFilter
   resetPasswordExpires: DateTimeNullableFilter
   resetPasswordToken: StringNullableFilter
+  role: EnumRoleFilter
+  updatedAt: DateTimeFilter
+}
+
+input UserWhereUniqueInput {
+  AND: [UserWhereInput!]
+  Company: CompanyNullableRelationFilter
+  NOT: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  companyId: StringNullableFilter
+  createdAt: DateTimeFilter
+  email: String
+  firstname: StringNullableFilter
+  id: String
+  lastname: StringNullableFilter
+  password: StringFilter
+  resetPasswordExpires: DateTimeNullableFilter
+  resetPasswordToken: String
   role: EnumRoleFilter
   updatedAt: DateTimeFilter
 }

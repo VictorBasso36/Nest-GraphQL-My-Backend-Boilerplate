@@ -2,6 +2,8 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFieldUpdateOperationsInput } from '../prisma/string-field-update-operations.input';
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
+import { NullableIntFieldUpdateOperationsInput } from '../prisma/nullable-int-field-update-operations.input';
+import { NullableFloatFieldUpdateOperationsInput } from '../prisma/nullable-float-field-update-operations.input';
 import { CommentUncheckedUpdateManyWithoutCompanyNestedInput } from '../comment/comment-unchecked-update-many-without-company-nested.input';
 
 @InputType()
@@ -25,8 +27,11 @@ export class CompanyUncheckedUpdateWithoutUserInput {
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     name?: StringFieldUpdateOperationsInput;
 
-    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
-    rating?: StringFieldUpdateOperationsInput;
+    @Field(() => NullableIntFieldUpdateOperationsInput, {nullable:true})
+    ratingCount?: NullableIntFieldUpdateOperationsInput;
+
+    @Field(() => NullableFloatFieldUpdateOperationsInput, {nullable:true})
+    rating?: NullableFloatFieldUpdateOperationsInput;
 
     @Field(() => CommentUncheckedUpdateManyWithoutCompanyNestedInput, {nullable:true})
     Comment?: CommentUncheckedUpdateManyWithoutCompanyNestedInput;

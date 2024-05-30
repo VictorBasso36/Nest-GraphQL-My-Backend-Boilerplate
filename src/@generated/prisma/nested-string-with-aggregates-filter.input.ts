@@ -36,6 +36,9 @@ export class NestedStringWithAggregatesFilter {
     @Field(() => String, {nullable:true})
     endsWith?: string;
 
+    @Field(() => String, {nullable:true})
+    search?: string;
+
     @Field(() => NestedStringWithAggregatesFilter, {nullable:true})
     not?: NestedStringWithAggregatesFilter;
 

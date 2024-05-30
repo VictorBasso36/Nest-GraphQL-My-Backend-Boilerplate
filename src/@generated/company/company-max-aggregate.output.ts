@@ -1,5 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { ObjectType } from '@nestjs/graphql';
+import { Int } from '@nestjs/graphql';
+import { Float } from '@nestjs/graphql';
 
 @ObjectType()
 export class CompanyMaxAggregate {
@@ -22,6 +24,9 @@ export class CompanyMaxAggregate {
     @Field(() => String, {nullable:true})
     name?: string;
 
-    @Field(() => String, {nullable:true})
-    rating?: string;
+    @Field(() => Int, {nullable:true})
+    ratingCount?: number;
+
+    @Field(() => Float, {nullable:true})
+    rating?: number;
 }

@@ -23,6 +23,9 @@ export class CompanyCountAggregateInput {
     name?: true;
 
     @Field(() => Boolean, {nullable:true})
+    ratingCount?: true;
+
+    @Field(() => Boolean, {nullable:true})
     rating?: true;
 
     @Field(() => Boolean, {nullable:true})
