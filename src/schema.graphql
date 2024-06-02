@@ -135,6 +135,11 @@ input CommentOrderByWithRelationAndSearchRelevanceInput {
   updatedAt: SortOrder
 }
 
+type CommentPaginatedModel {
+  nodes: [Comment!]!
+  pageInfo: PageInfo
+}
+
 input CommentRelationFilter {
   is: CommentWhereInput
   isNot: CommentWhereInput
@@ -214,6 +219,11 @@ input CommentResponseOrderByWithRelationAndSearchRelevanceInput {
   createdAt: SortOrder
   id: SortOrder
   updatedAt: SortOrder
+}
+
+type CommentResponsePaginatedModel {
+  nodes: [CommentResponse!]!
+  pageInfo: PageInfo
 }
 
 enum CommentResponseScalarFieldEnum {
@@ -899,8 +909,8 @@ type PageInfo {
 }
 
 type Query {
-  CommentResponses(cursor: CommentResponseWhereUniqueInput, distinct: [CommentResponseScalarFieldEnum!], orderBy: [CommentResponseOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CommentResponseWhereInput): [CommentResponse!]
-  comments(cursor: CommentWhereUniqueInput, distinct: [CommentScalarFieldEnum!], orderBy: [CommentOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CommentWhereInput): [Comment!]
+  CommentResponses(cursor: CommentResponseWhereUniqueInput, distinct: [CommentResponseScalarFieldEnum!], orderBy: [CommentResponseOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CommentResponseWhereInput): CommentResponsePaginatedModel
+  comments(cursor: CommentWhereUniqueInput, distinct: [CommentScalarFieldEnum!], orderBy: [CommentOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CommentWhereInput): CommentPaginatedModel
   companys(cursor: CompanyWhereUniqueInput, distinct: [CompanyScalarFieldEnum!], orderBy: [CompanyOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CompanyWhereInput): CompanyPaginatedModel
   findUniqueCompany(where: CompanyWhereUniqueInput!): Company
   hello(name: String!): String!

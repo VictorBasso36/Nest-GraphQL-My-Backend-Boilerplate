@@ -14,9 +14,8 @@ import {  } from './models/find-many.model';
 import { FindUniqueCompanyArgs } from 'src/@generated/company/find-unique-company.args';
 import { Company } from '../@generated/company/company.model';
 import { CompanyPaginatedModel } from './models/find-many.model';
-import { ExtendedFindManyCompanyArgs } from './dto/find-many.input';
 import { FindManyCompanyArgs } from 'src/@generated/company/find-many-company.args';
-import { PageInfoInput } from 'src/common/pagination/page-info-input.model';
+
 
 @Resolver(() => Company)
 export class CompanyResolver {
@@ -27,34 +26,37 @@ export class CompanyResolver {
   @Query(() => CompanyPaginatedModel, { nullable: true })
   async companys(
     @Args() args: FindManyCompanyArgs,
-    //@Args('page') pageInfo: PageInfoInput,
   ) {
-    
-    // const {pageInfo, ...otherArgs} = args
+    const take = args?.take || 10;
+    const skip = args?.skip || 0;
   
-    const data = await this.prisma.company.findMany(
-      {...args}
-    )
+    const totalItems = await this.prisma.company.count();
   
+
+    const totalPages = Math.ceil(totalItems / take);
+  
+
+    const data = await this.prisma.company.findMany({
+      ...args,
+      take,
+      skip,
+    });
+  
+
+    const hasNextPage = (skip + take) < totalItems;
+    const hasPreviousPage = skip > 0;
+
     return {
       pageInfo: {
-        take: args?.take,
-  
-        hasNextPage: false,
-
-        hasPreviousPage: false,
-      
-    
-        totalPages: 100,
-      
-        totalItems: 100,
-      
-        
-        skip: args?.take
-      
+        take,
+        hasNextPage,
+        hasPreviousPage,
+        totalPages,
+        totalItems,
+        skip,
       },
-      nodes: data
-    }
+      nodes: data,
+    };
   }
 
   @Query(() => Company, {nullable: true, name: 'findUniqueCompany'})
