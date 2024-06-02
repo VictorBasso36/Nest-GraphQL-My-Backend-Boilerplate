@@ -40,6 +40,10 @@ model Company {
   updatedAt   DateTime  @updatedAt
   cnpj        String    @unique
   location    String
+  description String?    
+  urlImage    String?   
+  working     String?
+  approved    Boolean?  @default(false)
   name        String
   ratingCount Int?      @default(0)
   rating      Float?
@@ -53,7 +57,7 @@ model Comment {
   updatedAt       DateTime          @updatedAt
   content         String
   rating          Float?
-  approved        Boolean           @default(false)
+  approved        Boolean?          @default(false)
   companyId       String
   Company         Company           @relation(fields: [companyId], references: [id])
   CommentResponse CommentResponse[]
@@ -62,6 +66,7 @@ model Comment {
 model CommentResponse {
   id        String   @id @default(cuid())
   CommentId String
+  approved  Boolean? @default(false)
   Comment   Comment  @relation(fields: [CommentId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

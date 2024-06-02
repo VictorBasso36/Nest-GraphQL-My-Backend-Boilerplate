@@ -22,6 +22,18 @@ export class CompanyCreateWithoutCommentInput {
     @Field(() => String, {nullable:false})
     location!: string;
 
+    @Field(() => String, {nullable:true})
+    description?: string;
+
+    @Field(() => String, {nullable:true})
+    urlImage?: string;
+
+    @Field(() => String, {nullable:true})
+    working?: string;
+
+    @Field(() => Boolean, {nullable:true})
+    approved?: boolean;
+
     @Field(() => String, {nullable:false})
     name!: string;
 

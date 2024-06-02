@@ -12,6 +12,9 @@ export class CommentResponseMaxOrderByAggregateInput {
     CommentId?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    approved?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

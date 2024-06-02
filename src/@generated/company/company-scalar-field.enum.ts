@@ -6,6 +6,10 @@ export enum CompanyScalarFieldEnum {
     updatedAt = "updatedAt",
     cnpj = "cnpj",
     location = "location",
+    description = "description",
+    urlImage = "urlImage",
+    working = "working",
+    approved = "approved",
     name = "name",
     ratingCount = "ratingCount",
     rating = "rating"

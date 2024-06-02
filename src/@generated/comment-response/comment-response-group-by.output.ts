@@ -13,6 +13,9 @@ export class CommentResponseGroupBy {
     @Field(() => String, {nullable:false})
     CommentId!: string;
 
+    @Field(() => Boolean, {nullable:true})
+    approved?: boolean;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 

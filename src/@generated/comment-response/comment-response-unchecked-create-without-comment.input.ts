@@ -7,6 +7,9 @@ export class CommentResponseUncheckedCreateWithoutCommentInput {
     @Field(() => String, {nullable:true})
     id?: string;
 
+    @Field(() => Boolean, {nullable:true})
+    approved?: boolean;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { CommentResponseWhereInput } from './comment-response-where.input';
 import { StringFilter } from '../prisma/string-filter.input';
+import { BoolNullableFilter } from '../prisma/bool-nullable-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { CommentRelationFilter } from '../comment/comment-relation-filter.input';
 
@@ -22,6 +23,9 @@ export class CommentResponseWhereUniqueInput {
 
     @Field(() => StringFilter, {nullable:true})
     CommentId?: StringFilter;
+
+    @Field(() => BoolNullableFilter, {nullable:true})
+    approved?: BoolNullableFilter;
 
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;

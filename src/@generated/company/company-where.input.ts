@@ -2,6 +2,8 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../prisma/string-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
+import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
+import { BoolNullableFilter } from '../prisma/bool-nullable-filter.input';
 import { IntNullableFilter } from '../prisma/int-nullable-filter.input';
 import { FloatNullableFilter } from '../prisma/float-nullable-filter.input';
 import { UserListRelationFilter } from '../user/user-list-relation-filter.input';
@@ -33,6 +35,18 @@ export class CompanyWhereInput {
 
     @Field(() => StringFilter, {nullable:true})
     location?: StringFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    description?: StringNullableFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    urlImage?: StringNullableFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    working?: StringNullableFilter;
+
+    @Field(() => BoolNullableFilter, {nullable:true})
+    approved?: BoolNullableFilter;
 
     @Field(() => StringFilter, {nullable:true})
     name?: StringFilter;

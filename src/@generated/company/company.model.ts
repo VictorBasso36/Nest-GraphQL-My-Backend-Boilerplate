@@ -25,6 +25,18 @@ export class Company {
     @Field(() => String, {nullable:false})
     location!: string;
 
+    @Field(() => String, {nullable:true})
+    description!: string | null;
+
+    @Field(() => String, {nullable:true})
+    urlImage!: string | null;
+
+    @Field(() => String, {nullable:true})
+    working!: string | null;
+
+    @Field(() => Boolean, {nullable:true,defaultValue:false})
+    approved!: boolean | null;
+
     @Field(() => String, {nullable:false})
     name!: string;
 

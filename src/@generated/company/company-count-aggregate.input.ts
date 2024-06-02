@@ -20,6 +20,18 @@ export class CompanyCountAggregateInput {
     location?: true;
 
     @Field(() => Boolean, {nullable:true})
+    description?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    urlImage?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    working?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    approved?: true;
+
+    @Field(() => Boolean, {nullable:true})
     name?: true;
 
     @Field(() => Boolean, {nullable:true})

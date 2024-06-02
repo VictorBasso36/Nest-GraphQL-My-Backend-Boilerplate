@@ -23,6 +23,10 @@ Table Company {
   updatedAt DateTime [not null]
   cnpj String [unique, not null]
   location String [not null]
+  description String
+  urlImage String
+  working String
+  approved Boolean [default: false]
   name String [not null]
   ratingCount Int [default: 0]
   rating Float
@@ -36,7 +40,7 @@ Table Comment {
   updatedAt DateTime [not null]
   content String [not null]
   rating Float
-  approved Boolean [not null, default: false]
+  approved Boolean [default: false]
   companyId String [not null]
   Company Company [not null]
   CommentResponse CommentResponse [not null]
@@ -45,6 +49,7 @@ Table Comment {
 Table CommentResponse {
   id String [pk]
   CommentId String [not null]
+  approved Boolean [default: false]
   Comment Comment [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]

@@ -25,8 +25,8 @@ export class CommentGroupBy {
     @Field(() => Float, {nullable:true})
     rating?: number;
 
-    @Field(() => Boolean, {nullable:false})
-    approved!: boolean;
+    @Field(() => Boolean, {nullable:true})
+    approved?: boolean;
 
     @Field(() => String, {nullable:false})
     companyId!: string;

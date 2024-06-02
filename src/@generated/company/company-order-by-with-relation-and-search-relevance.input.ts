@@ -24,6 +24,18 @@ export class CompanyOrderByWithRelationAndSearchRelevanceInput {
     @Field(() => SortOrder, {nullable:true})
     location?: keyof typeof SortOrder;
 
+    @Field(() => SortOrderInput, {nullable:true})
+    description?: SortOrderInput;
+
+    @Field(() => SortOrderInput, {nullable:true})
+    urlImage?: SortOrderInput;
+
+    @Field(() => SortOrderInput, {nullable:true})
+    working?: SortOrderInput;
+
+    @Field(() => SortOrderInput, {nullable:true})
+    approved?: SortOrderInput;
+
     @Field(() => SortOrder, {nullable:true})
     name?: keyof typeof SortOrder;
 

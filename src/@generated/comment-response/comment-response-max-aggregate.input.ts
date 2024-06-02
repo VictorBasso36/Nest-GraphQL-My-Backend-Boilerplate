@@ -11,6 +11,9 @@ export class CommentResponseMaxAggregateInput {
     CommentId?: true;
 
     @Field(() => Boolean, {nullable:true})
+    approved?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})

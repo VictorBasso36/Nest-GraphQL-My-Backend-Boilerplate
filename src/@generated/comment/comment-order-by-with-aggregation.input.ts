@@ -26,8 +26,8 @@ export class CommentOrderByWithAggregationInput {
     @Field(() => SortOrderInput, {nullable:true})
     rating?: SortOrderInput;
 
-    @Field(() => SortOrder, {nullable:true})
-    approved?: keyof typeof SortOrder;
+    @Field(() => SortOrderInput, {nullable:true})
+    approved?: SortOrderInput;
 
     @Field(() => SortOrder, {nullable:true})
     companyId?: keyof typeof SortOrder;

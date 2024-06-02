@@ -22,6 +22,18 @@ export class CompanyMinAggregate {
     location?: string;
 
     @Field(() => String, {nullable:true})
+    description?: string;
+
+    @Field(() => String, {nullable:true})
+    urlImage?: string;
+
+    @Field(() => String, {nullable:true})
+    working?: string;
+
+    @Field(() => Boolean, {nullable:true})
+    approved?: boolean;
+
+    @Field(() => String, {nullable:true})
     name?: string;
 
     @Field(() => Int, {nullable:true})
