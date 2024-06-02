@@ -2,6 +2,8 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { StringWithAggregatesFilter } from '../prisma/string-with-aggregates-filter.input';
 import { DateTimeWithAggregatesFilter } from '../prisma/date-time-with-aggregates-filter.input';
+import { StringNullableWithAggregatesFilter } from '../prisma/string-nullable-with-aggregates-filter.input';
+import { BoolNullableWithAggregatesFilter } from '../prisma/bool-nullable-with-aggregates-filter.input';
 import { IntNullableWithAggregatesFilter } from '../prisma/int-nullable-with-aggregates-filter.input';
 import { FloatNullableWithAggregatesFilter } from '../prisma/float-nullable-with-aggregates-filter.input';
 
@@ -31,6 +33,18 @@ export class CompanyScalarWhereWithAggregatesInput {
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     location?: StringWithAggregatesFilter;
+
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    description?: StringNullableWithAggregatesFilter;
+
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    urlImage?: StringNullableWithAggregatesFilter;
+
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    working?: StringNullableWithAggregatesFilter;
+
+    @Field(() => BoolNullableWithAggregatesFilter, {nullable:true})
+    approved?: BoolNullableWithAggregatesFilter;
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     name?: StringWithAggregatesFilter;

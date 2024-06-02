@@ -21,6 +21,18 @@ export class CompanyCountAggregate {
     location!: number;
 
     @Field(() => Int, {nullable:false})
+    description!: number;
+
+    @Field(() => Int, {nullable:false})
+    urlImage!: number;
+
+    @Field(() => Int, {nullable:false})
+    working!: number;
+
+    @Field(() => Int, {nullable:false})
+    approved!: number;
+
+    @Field(() => Int, {nullable:false})
     name!: number;
 
     @Field(() => Int, {nullable:false})

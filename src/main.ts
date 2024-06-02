@@ -9,6 +9,7 @@ import type {
   NestConfig,
   SwaggerConfig,
 } from './common/configs/config.interface';
+import { json } from 'express';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -18,6 +19,9 @@ async function bootstrap() {
 
   // enable shutdown hook
   app.enableShutdownHooks();
+
+
+  app.use(json({ limit: '50mb' }));
 
   // Prisma Client Exception Filter for unhandled exceptions
   const { httpAdapter } = app.get(HttpAdapterHost);

@@ -3,7 +3,7 @@ import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../prisma/string-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { FloatNullableFilter } from '../prisma/float-nullable-filter.input';
-import { BoolFilter } from '../prisma/bool-filter.input';
+import { BoolNullableFilter } from '../prisma/bool-nullable-filter.input';
 import { CompanyRelationFilter } from '../company/company-relation-filter.input';
 import { CommentResponseListRelationFilter } from '../comment-response/comment-response-list-relation-filter.input';
 
@@ -34,8 +34,8 @@ export class CommentWhereInput {
     @Field(() => FloatNullableFilter, {nullable:true})
     rating?: FloatNullableFilter;
 
-    @Field(() => BoolFilter, {nullable:true})
-    approved?: BoolFilter;
+    @Field(() => BoolNullableFilter, {nullable:true})
+    approved?: BoolNullableFilter;
 
     @Field(() => StringFilter, {nullable:true})
     companyId?: StringFilter;

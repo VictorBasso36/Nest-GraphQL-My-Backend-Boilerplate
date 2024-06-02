@@ -11,6 +11,8 @@ import config from './common/configs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GqlConfigService } from './gql-config.service';
 import { CompanyModule } from './company/company.module';
+import { CommentModule } from './comment/comment.module';
+import { CommentResponseModule } from './comment-response/comment-response.module';
 
 @Module({
   imports: [
@@ -36,6 +38,8 @@ import { CompanyModule } from './company/company.module';
     AuthModule,
     CompanyModule,
     UsersModule,
+    CommentResponseModule,
+    CommentModule
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],

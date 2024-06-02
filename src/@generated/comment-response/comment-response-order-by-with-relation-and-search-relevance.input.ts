@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { SortOrder } from '../prisma/sort-order.enum';
+import { SortOrderInput } from '../prisma/sort-order.input';
 import { CommentOrderByWithRelationAndSearchRelevanceInput } from '../comment/comment-order-by-with-relation-and-search-relevance.input';
 import { CommentResponseOrderByRelevanceInput } from './comment-response-order-by-relevance.input';
 
@@ -12,6 +13,9 @@ export class CommentResponseOrderByWithRelationAndSearchRelevanceInput {
 
     @Field(() => SortOrder, {nullable:true})
     CommentId?: keyof typeof SortOrder;
+
+    @Field(() => SortOrderInput, {nullable:true})
+    approved?: SortOrderInput;
 
     @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;

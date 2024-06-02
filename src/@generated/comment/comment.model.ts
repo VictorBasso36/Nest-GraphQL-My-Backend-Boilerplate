@@ -24,8 +24,8 @@ export class Comment {
     @Field(() => Float, {nullable:true})
     rating!: number | null;
 
-    @Field(() => Boolean, {nullable:false,defaultValue:false})
-    approved!: boolean;
+    @Field(() => Boolean, {nullable:true,defaultValue:false})
+    approved!: boolean | null;
 
     @Field(() => String, {nullable:false})
     companyId!: string;

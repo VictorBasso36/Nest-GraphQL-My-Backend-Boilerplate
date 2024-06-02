@@ -11,9 +11,9 @@ type Auth {
   user: User!
 }
 
-input BoolFilter {
+input BoolNullableFilter {
   equals: Boolean
-  not: NestedBoolFilter
+  not: NestedBoolNullableFilter
 }
 
 input ChangePasswordInput {
@@ -25,7 +25,7 @@ type Comment {
   CommentResponse: [CommentResponse!]
   Company: Company!
   _count: CommentCount!
-  approved: Boolean!
+  approved: Boolean
   companyId: String!
   content: String!
   createdAt: DateTime!
@@ -36,6 +36,17 @@ type Comment {
 
 type CommentCount {
   CommentResponse: Int!
+}
+
+input CommentCreateInput {
+  CommentResponse: CommentResponseCreateNestedManyWithoutCommentInput
+  Company: CompanyCreateNestedOneWithoutCommentInput!
+  approved: Boolean
+  content: String!
+  createdAt: DateTime
+  id: String
+  rating: Float
+  updatedAt: DateTime
 }
 
 input CommentCreateManyCompanyInput {
@@ -59,9 +70,24 @@ input CommentCreateNestedManyWithoutCompanyInput {
   createMany: CommentCreateManyCompanyInputEnvelope
 }
 
+input CommentCreateOrConnectWithoutCommentResponseInput {
+  create: CommentCreateWithoutCommentResponseInput!
+  where: CommentWhereUniqueInput!
+}
+
 input CommentCreateOrConnectWithoutCompanyInput {
   create: CommentCreateWithoutCompanyInput!
   where: CommentWhereUniqueInput!
+}
+
+input CommentCreateWithoutCommentResponseInput {
+  Company: CompanyCreateNestedOneWithoutCommentInput!
+  approved: Boolean
+  content: String!
+  createdAt: DateTime
+  id: String
+  rating: Float
+  updatedAt: DateTime
 }
 
 input CommentCreateWithoutCompanyInput {
@@ -84,6 +110,31 @@ input CommentOrderByRelationAggregateInput {
   _count: SortOrder
 }
 
+enum CommentOrderByRelevanceFieldEnum {
+  companyId
+  content
+  id
+}
+
+input CommentOrderByRelevanceInput {
+  fields: [CommentOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input CommentOrderByWithRelationAndSearchRelevanceInput {
+  CommentResponse: CommentResponseOrderByRelationAggregateInput
+  Company: CompanyOrderByWithRelationAndSearchRelevanceInput
+  _relevance: CommentOrderByRelevanceInput
+  approved: SortOrderInput
+  companyId: SortOrder
+  content: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  rating: SortOrderInput
+  updatedAt: SortOrder
+}
+
 input CommentRelationFilter {
   is: CommentWhereInput
   isNot: CommentWhereInput
@@ -92,6 +143,7 @@ input CommentRelationFilter {
 type CommentResponse {
   Comment: Comment!
   CommentId: String!
+  approved: Boolean
   content: String!
   createdAt: DateTime!
   id: ID!
@@ -99,6 +151,7 @@ type CommentResponse {
 }
 
 input CommentResponseCreateManyCommentInput {
+  approved: Boolean
   content: String!
   createdAt: DateTime
   id: String
@@ -123,6 +176,7 @@ input CommentResponseCreateOrConnectWithoutCommentInput {
 }
 
 input CommentResponseCreateWithoutCommentInput {
+  approved: Boolean
   content: String!
   createdAt: DateTime
   id: String
@@ -135,12 +189,116 @@ input CommentResponseListRelationFilter {
   some: CommentResponseWhereInput
 }
 
+input CommentResponseOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+enum CommentResponseOrderByRelevanceFieldEnum {
+  CommentId
+  content
+  id
+}
+
+input CommentResponseOrderByRelevanceInput {
+  fields: [CommentResponseOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input CommentResponseOrderByWithRelationAndSearchRelevanceInput {
+  Comment: CommentOrderByWithRelationAndSearchRelevanceInput
+  CommentId: SortOrder
+  _relevance: CommentResponseOrderByRelevanceInput
+  approved: SortOrderInput
+  content: SortOrder
+  createdAt: SortOrder
+  id: SortOrder
+  updatedAt: SortOrder
+}
+
+enum CommentResponseScalarFieldEnum {
+  CommentId
+  approved
+  content
+  createdAt
+  id
+  updatedAt
+}
+
+input CommentResponseScalarWhereInput {
+  AND: [CommentResponseScalarWhereInput!]
+  CommentId: StringFilter
+  NOT: [CommentResponseScalarWhereInput!]
+  OR: [CommentResponseScalarWhereInput!]
+  approved: BoolNullableFilter
+  content: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input CommentResponseUpdateInput {
+  Comment: CommentUpdateOneRequiredWithoutCommentResponseNestedInput
+  approved: NullableBoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CommentResponseUpdateManyMutationInput {
+  approved: NullableBoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CommentResponseUpdateManyWithWhereWithoutCommentInput {
+  data: CommentResponseUpdateManyMutationInput!
+  where: CommentResponseScalarWhereInput!
+}
+
+input CommentResponseUpdateManyWithoutCommentNestedInput {
+  connect: [CommentResponseWhereUniqueInput!]
+  connectOrCreate: [CommentResponseCreateOrConnectWithoutCommentInput!]
+  create: [CommentResponseCreateWithoutCommentInput!]
+  createMany: CommentResponseCreateManyCommentInputEnvelope
+  delete: [CommentResponseWhereUniqueInput!]
+  deleteMany: [CommentResponseScalarWhereInput!]
+  disconnect: [CommentResponseWhereUniqueInput!]
+  set: [CommentResponseWhereUniqueInput!]
+  update: [CommentResponseUpdateWithWhereUniqueWithoutCommentInput!]
+  updateMany: [CommentResponseUpdateManyWithWhereWithoutCommentInput!]
+  upsert: [CommentResponseUpsertWithWhereUniqueWithoutCommentInput!]
+}
+
+input CommentResponseUpdateWithWhereUniqueWithoutCommentInput {
+  data: CommentResponseUpdateWithoutCommentInput!
+  where: CommentResponseWhereUniqueInput!
+}
+
+input CommentResponseUpdateWithoutCommentInput {
+  approved: NullableBoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CommentResponseUpsertWithWhereUniqueWithoutCommentInput {
+  create: CommentResponseCreateWithoutCommentInput!
+  update: CommentResponseUpdateWithoutCommentInput!
+  where: CommentResponseWhereUniqueInput!
+}
+
 input CommentResponseWhereInput {
   AND: [CommentResponseWhereInput!]
   Comment: CommentRelationFilter
   CommentId: StringFilter
   NOT: [CommentResponseWhereInput!]
   OR: [CommentResponseWhereInput!]
+  approved: BoolNullableFilter
   content: StringFilter
   createdAt: DateTimeFilter
   id: StringFilter
@@ -153,10 +311,123 @@ input CommentResponseWhereUniqueInput {
   CommentId: StringFilter
   NOT: [CommentResponseWhereInput!]
   OR: [CommentResponseWhereInput!]
+  approved: BoolNullableFilter
   content: StringFilter
   createdAt: DateTimeFilter
   id: String
   updatedAt: DateTimeFilter
+}
+
+enum CommentScalarFieldEnum {
+  approved
+  companyId
+  content
+  createdAt
+  id
+  rating
+  updatedAt
+}
+
+input CommentScalarWhereInput {
+  AND: [CommentScalarWhereInput!]
+  NOT: [CommentScalarWhereInput!]
+  OR: [CommentScalarWhereInput!]
+  approved: BoolNullableFilter
+  companyId: StringFilter
+  content: StringFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  rating: FloatNullableFilter
+  updatedAt: DateTimeFilter
+}
+
+input CommentUpdateInput {
+  CommentResponse: CommentResponseUpdateManyWithoutCommentNestedInput
+  Company: CompanyUpdateOneRequiredWithoutCommentNestedInput
+  approved: NullableBoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  rating: NullableFloatFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CommentUpdateManyMutationInput {
+  approved: NullableBoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  rating: NullableFloatFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CommentUpdateManyWithWhereWithoutCompanyInput {
+  data: CommentUpdateManyMutationInput!
+  where: CommentScalarWhereInput!
+}
+
+input CommentUpdateManyWithoutCompanyNestedInput {
+  connect: [CommentWhereUniqueInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutCompanyInput!]
+  create: [CommentCreateWithoutCompanyInput!]
+  createMany: CommentCreateManyCompanyInputEnvelope
+  delete: [CommentWhereUniqueInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutCompanyInput!]
+  updateMany: [CommentUpdateManyWithWhereWithoutCompanyInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutCompanyInput!]
+}
+
+input CommentUpdateOneRequiredWithoutCommentResponseNestedInput {
+  connect: CommentWhereUniqueInput
+  connectOrCreate: CommentCreateOrConnectWithoutCommentResponseInput
+  create: CommentCreateWithoutCommentResponseInput
+  update: CommentUpdateToOneWithWhereWithoutCommentResponseInput
+  upsert: CommentUpsertWithoutCommentResponseInput
+}
+
+input CommentUpdateToOneWithWhereWithoutCommentResponseInput {
+  data: CommentUpdateWithoutCommentResponseInput!
+  where: CommentWhereInput
+}
+
+input CommentUpdateWithWhereUniqueWithoutCompanyInput {
+  data: CommentUpdateWithoutCompanyInput!
+  where: CommentWhereUniqueInput!
+}
+
+input CommentUpdateWithoutCommentResponseInput {
+  Company: CompanyUpdateOneRequiredWithoutCommentNestedInput
+  approved: NullableBoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  rating: NullableFloatFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CommentUpdateWithoutCompanyInput {
+  CommentResponse: CommentResponseUpdateManyWithoutCommentNestedInput
+  approved: NullableBoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  rating: NullableFloatFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CommentUpsertWithWhereUniqueWithoutCompanyInput {
+  create: CommentCreateWithoutCompanyInput!
+  update: CommentUpdateWithoutCompanyInput!
+  where: CommentWhereUniqueInput!
+}
+
+input CommentUpsertWithoutCommentResponseInput {
+  create: CommentCreateWithoutCommentResponseInput!
+  update: CommentUpdateWithoutCommentResponseInput!
+  where: CommentWhereInput
 }
 
 input CommentWhereInput {
@@ -165,7 +436,7 @@ input CommentWhereInput {
   Company: CompanyRelationFilter
   NOT: [CommentWhereInput!]
   OR: [CommentWhereInput!]
-  approved: BoolFilter
+  approved: BoolNullableFilter
   companyId: StringFilter
   content: StringFilter
   createdAt: DateTimeFilter
@@ -180,7 +451,7 @@ input CommentWhereUniqueInput {
   Company: CompanyRelationFilter
   NOT: [CommentWhereInput!]
   OR: [CommentWhereInput!]
-  approved: BoolFilter
+  approved: BoolNullableFilter
   companyId: StringFilter
   content: StringFilter
   createdAt: DateTimeFilter
@@ -193,14 +464,18 @@ type Company {
   Comment: [Comment!]
   User: [User!]
   _count: CompanyCount!
+  approved: Boolean
   cnpj: String!
   createdAt: DateTime!
+  description: String
   id: ID!
   location: String!
   name: String!
   rating: Float
   ratingCount: Int
   updatedAt: DateTime!
+  urlImage: String
+  working: String
 }
 
 type CompanyCount {
@@ -211,14 +486,45 @@ type CompanyCount {
 input CompanyCreateInput {
   Comment: CommentCreateNestedManyWithoutCompanyInput
   User: UserCreateNestedManyWithoutCompanyInput
+  approved: Boolean
   cnpj: String!
   createdAt: DateTime
+  description: String
   id: String
   location: String!
   name: String!
   rating: Float
   ratingCount: Int
   updatedAt: DateTime
+  urlImage: String
+  working: String
+}
+
+input CompanyCreateNestedOneWithoutCommentInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutCommentInput
+  create: CompanyCreateWithoutCommentInput
+}
+
+input CompanyCreateOrConnectWithoutCommentInput {
+  create: CompanyCreateWithoutCommentInput!
+  where: CompanyWhereUniqueInput!
+}
+
+input CompanyCreateWithoutCommentInput {
+  User: UserCreateNestedManyWithoutCompanyInput
+  approved: Boolean
+  cnpj: String!
+  createdAt: DateTime
+  description: String
+  id: String
+  location: String!
+  name: String!
+  rating: Float
+  ratingCount: Int
+  updatedAt: DateTime
+  urlImage: String
+  working: String
 }
 
 input CompanyNullableRelationFilter {
@@ -228,9 +534,12 @@ input CompanyNullableRelationFilter {
 
 enum CompanyOrderByRelevanceFieldEnum {
   cnpj
+  description
   id
   location
   name
+  urlImage
+  working
 }
 
 input CompanyOrderByRelevanceInput {
@@ -243,14 +552,23 @@ input CompanyOrderByWithRelationAndSearchRelevanceInput {
   Comment: CommentOrderByRelationAggregateInput
   User: UserOrderByRelationAggregateInput
   _relevance: CompanyOrderByRelevanceInput
+  approved: SortOrderInput
   cnpj: SortOrder
   createdAt: SortOrder
+  description: SortOrderInput
   id: SortOrder
   location: SortOrder
   name: SortOrder
   rating: SortOrderInput
   ratingCount: SortOrderInput
   updatedAt: SortOrder
+  urlImage: SortOrderInput
+  working: SortOrderInput
+}
+
+type CompanyPaginatedModel {
+  nodes: [Company!]!
+  pageInfo: PageInfo
 }
 
 input CompanyRelationFilter {
@@ -259,14 +577,70 @@ input CompanyRelationFilter {
 }
 
 enum CompanyScalarFieldEnum {
+  approved
   cnpj
   createdAt
+  description
   id
   location
   name
   rating
   ratingCount
   updatedAt
+  urlImage
+  working
+}
+
+input CompanyUpdateInput {
+  Comment: CommentUpdateManyWithoutCompanyNestedInput
+  User: UserUpdateManyWithoutCompanyNestedInput
+  approved: NullableBoolFieldUpdateOperationsInput
+  cnpj: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  location: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  rating: NullableFloatFieldUpdateOperationsInput
+  ratingCount: NullableIntFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  urlImage: NullableStringFieldUpdateOperationsInput
+  working: NullableStringFieldUpdateOperationsInput
+}
+
+input CompanyUpdateOneRequiredWithoutCommentNestedInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutCommentInput
+  create: CompanyCreateWithoutCommentInput
+  update: CompanyUpdateToOneWithWhereWithoutCommentInput
+  upsert: CompanyUpsertWithoutCommentInput
+}
+
+input CompanyUpdateToOneWithWhereWithoutCommentInput {
+  data: CompanyUpdateWithoutCommentInput!
+  where: CompanyWhereInput
+}
+
+input CompanyUpdateWithoutCommentInput {
+  User: UserUpdateManyWithoutCompanyNestedInput
+  approved: NullableBoolFieldUpdateOperationsInput
+  cnpj: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  location: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  rating: NullableFloatFieldUpdateOperationsInput
+  ratingCount: NullableIntFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  urlImage: NullableStringFieldUpdateOperationsInput
+  working: NullableStringFieldUpdateOperationsInput
+}
+
+input CompanyUpsertWithoutCommentInput {
+  create: CompanyCreateWithoutCommentInput!
+  update: CompanyUpdateWithoutCommentInput!
+  where: CompanyWhereInput
 }
 
 input CompanyWhereInput {
@@ -275,14 +649,18 @@ input CompanyWhereInput {
   NOT: [CompanyWhereInput!]
   OR: [CompanyWhereInput!]
   User: UserListRelationFilter
+  approved: BoolNullableFilter
   cnpj: StringFilter
   createdAt: DateTimeFilter
+  description: StringNullableFilter
   id: StringFilter
   location: StringFilter
   name: StringFilter
   rating: FloatNullableFilter
   ratingCount: IntNullableFilter
   updatedAt: DateTimeFilter
+  urlImage: StringNullableFilter
+  working: StringNullableFilter
 }
 
 input CompanyWhereUniqueInput {
@@ -291,20 +669,28 @@ input CompanyWhereUniqueInput {
   NOT: [CompanyWhereInput!]
   OR: [CompanyWhereInput!]
   User: UserListRelationFilter
+  approved: BoolNullableFilter
   cnpj: String
   createdAt: DateTimeFilter
+  description: StringNullableFilter
   id: String
   location: StringFilter
   name: StringFilter
   rating: FloatNullableFilter
   ratingCount: IntNullableFilter
   updatedAt: DateTimeFilter
+  urlImage: StringNullableFilter
+  working: StringNullableFilter
 }
 
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
 
 input DateTimeFilter {
   equals: DateTime
@@ -326,6 +712,10 @@ input DateTimeNullableFilter {
   lte: DateTime
   not: NestedDateTimeNullableFilter
   notIn: [DateTime!]
+}
+
+input EnumRoleFieldUpdateOperationsInput {
+  set: Role
 }
 
 input EnumRoleFilter {
@@ -369,16 +759,20 @@ input LoginInput {
 
 type Mutation {
   changePassword(data: ChangePasswordInput!): User!
+  createComment(data: CommentCreateInput!): Comment!
   createCompany(data: CompanyCreateInput!): Company!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
   signup(data: SignupInput!): Auth!
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment!
+  updateCommentResponse(data: CommentResponseUpdateInput!, where: CommentResponseWhereUniqueInput!): CommentResponse!
+  updateCompany(data: CompanyUpdateInput!, where: CompanyWhereUniqueInput!): Company!
   updateUser(data: UpdateUserInput!): User!
 }
 
-input NestedBoolFilter {
+input NestedBoolNullableFilter {
   equals: Boolean
-  not: NestedBoolFilter
+  not: NestedBoolNullableFilter
 }
 
 input NestedDateTimeFilter {
@@ -462,13 +856,52 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
+input NullableBoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input NullableFloatFieldUpdateOperationsInput {
+  decrement: Float
+  divide: Float
+  increment: Float
+  multiply: Float
+  set: Float
+}
+
+input NullableIntFieldUpdateOperationsInput {
+  decrement: Int
+  divide: Int
+  increment: Int
+  multiply: Int
+  set: Int
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
 enum NullsOrder {
   first
   last
 }
 
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  skip: Int
+  take: Int
+  totalItems: Int!
+  totalPages: Int!
+}
+
 type Query {
-  companys(cursor: CompanyWhereUniqueInput, distinct: [CompanyScalarFieldEnum!], orderBy: [CompanyOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CompanyWhereInput): [Company!]
+  CommentResponses(cursor: CommentResponseWhereUniqueInput, distinct: [CommentResponseScalarFieldEnum!], orderBy: [CommentResponseOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CommentResponseWhereInput): [CommentResponse!]
+  comments(cursor: CommentWhereUniqueInput, distinct: [CommentScalarFieldEnum!], orderBy: [CommentOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CommentWhereInput): [Comment!]
+  companys(cursor: CompanyWhereUniqueInput, distinct: [CompanyScalarFieldEnum!], orderBy: [CompanyOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CompanyWhereInput): CompanyPaginatedModel
   findUniqueCompany(where: CompanyWhereUniqueInput!): Company
   hello(name: String!): String!
   helloWorld: String!
@@ -500,6 +933,10 @@ enum SortOrder {
 input SortOrderInput {
   nulls: NullsOrder
   sort: SortOrder!
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
 }
 
 input StringFilter {
@@ -613,6 +1050,79 @@ input UserListRelationFilter {
 
 input UserOrderByRelationAggregateInput {
   _count: SortOrder
+}
+
+input UserScalarWhereInput {
+  AND: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  companyId: StringNullableFilter
+  createdAt: DateTimeFilter
+  email: StringFilter
+  firstname: StringNullableFilter
+  id: StringFilter
+  lastname: StringNullableFilter
+  password: StringFilter
+  resetPasswordExpires: DateTimeNullableFilter
+  resetPasswordToken: StringNullableFilter
+  role: EnumRoleFilter
+  updatedAt: DateTimeFilter
+}
+
+input UserUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstname: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  lastname: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  resetPasswordExpires: NullableDateTimeFieldUpdateOperationsInput
+  resetPasswordToken: NullableStringFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpdateManyWithWhereWithoutCompanyInput {
+  data: UserUpdateManyMutationInput!
+  where: UserScalarWhereInput!
+}
+
+input UserUpdateManyWithoutCompanyNestedInput {
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutCompanyInput!]
+  create: [UserCreateWithoutCompanyInput!]
+  createMany: UserCreateManyCompanyInputEnvelope
+  delete: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutCompanyInput!]
+  updateMany: [UserUpdateManyWithWhereWithoutCompanyInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutCompanyInput!]
+}
+
+input UserUpdateWithWhereUniqueWithoutCompanyInput {
+  data: UserUpdateWithoutCompanyInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpdateWithoutCompanyInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstname: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  lastname: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  resetPasswordExpires: NullableDateTimeFieldUpdateOperationsInput
+  resetPasswordToken: NullableStringFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUpsertWithWhereUniqueWithoutCompanyInput {
+  create: UserCreateWithoutCompanyInput!
+  update: UserUpdateWithoutCompanyInput!
+  where: UserWhereUniqueInput!
 }
 
 input UserWhereInput {

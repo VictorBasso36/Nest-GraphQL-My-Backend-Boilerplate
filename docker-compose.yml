@@ -11,6 +11,8 @@ services:
       - postgres
     env_file:
       - .env
+    volumes:
+      - uploads:/app/uploads
 
   postgres:
     image: postgres:15
@@ -26,3 +28,5 @@ services:
 volumes:
   postgres:
     name: nest-db
+  uploads:
+    name: nest-uploads

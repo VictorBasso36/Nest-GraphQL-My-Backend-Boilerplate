@@ -21,6 +21,18 @@ export class CompanyMaxOrderByAggregateInput {
     location?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    description?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    urlImage?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    working?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    approved?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     name?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

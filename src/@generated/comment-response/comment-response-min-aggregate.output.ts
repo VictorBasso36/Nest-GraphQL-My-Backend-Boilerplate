@@ -10,6 +10,9 @@ export class CommentResponseMinAggregate {
     @Field(() => String, {nullable:true})
     CommentId?: string;
 
+    @Field(() => Boolean, {nullable:true})
+    approved?: boolean;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

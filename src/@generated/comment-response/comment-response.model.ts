@@ -12,6 +12,9 @@ export class CommentResponse {
     @Field(() => String, {nullable:false})
     CommentId!: string;
 
+    @Field(() => Boolean, {nullable:true,defaultValue:false})
+    approved!: boolean | null;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
 

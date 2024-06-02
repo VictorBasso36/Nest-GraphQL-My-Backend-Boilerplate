@@ -10,6 +10,9 @@ export class CommentResponseUncheckedCreateInput {
     @Field(() => String, {nullable:false})
     CommentId!: string;
 
+    @Field(() => Boolean, {nullable:true})
+    approved?: boolean;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

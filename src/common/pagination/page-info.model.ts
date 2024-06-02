@@ -2,8 +2,8 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class PageInfo {
-  @Field(() => String, { nullable: true })
-  endCursor?: string;
+  @Field(() => Number, { nullable: true })
+  take?: number;
 
   @Field(() => Boolean)
   hasNextPage: boolean;
@@ -11,6 +11,12 @@ export class PageInfo {
   @Field(() => Boolean)
   hasPreviousPage: boolean;
 
-  @Field(() => String, { nullable: true })
-  startCursor?: string;
+  @Field(() => Number)
+  totalPages: number;
+
+  @Field(() => Number)
+  totalItems: number;
+
+  @Field(() => Number, { nullable: true })
+  skip?: number;
 }
