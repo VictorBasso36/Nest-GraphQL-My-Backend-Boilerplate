@@ -13,6 +13,9 @@ export class CommentGroupBy {
     @Field(() => String, {nullable:false})
     id!: string;
 
+    @Field(() => String, {nullable:true})
+    title?: string;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 
@@ -28,8 +31,8 @@ export class CommentGroupBy {
     @Field(() => Boolean, {nullable:true})
     approved?: boolean;
 
-    @Field(() => String, {nullable:false})
-    companyId!: string;
+    @Field(() => String, {nullable:true})
+    companyId?: string;
 
     @Field(() => CommentCountAggregate, {nullable:true})
     _count?: CommentCountAggregate;

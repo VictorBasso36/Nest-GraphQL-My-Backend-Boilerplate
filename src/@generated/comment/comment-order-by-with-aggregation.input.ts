@@ -14,6 +14,9 @@ export class CommentOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     id?: keyof typeof SortOrder;
 
+    @Field(() => SortOrderInput, {nullable:true})
+    title?: SortOrderInput;
+
     @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
@@ -29,8 +32,8 @@ export class CommentOrderByWithAggregationInput {
     @Field(() => SortOrderInput, {nullable:true})
     approved?: SortOrderInput;
 
-    @Field(() => SortOrder, {nullable:true})
-    companyId?: keyof typeof SortOrder;
+    @Field(() => SortOrderInput, {nullable:true})
+    companyId?: SortOrderInput;
 
     @Field(() => CommentCountOrderByAggregateInput, {nullable:true})
     _count?: CommentCountOrderByAggregateInput;

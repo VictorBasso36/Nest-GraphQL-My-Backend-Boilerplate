@@ -53,13 +53,14 @@ model Company {
 
 model Comment {
   id              String            @id @default(cuid())
+  title           String?           
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   content         String
   rating          Float?
   approved        Boolean?          @default(false)
-  companyId       String
-  Company         Company           @relation(fields: [companyId], references: [id])
+  companyId       String?
+  Company         Company?           @relation(fields: [companyId], references: [id])
   CommentResponse CommentResponse[]
 }
 

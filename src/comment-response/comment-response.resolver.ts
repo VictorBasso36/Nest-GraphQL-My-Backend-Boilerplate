@@ -10,6 +10,8 @@ import { CommentResponseCreateInput } from 'src/@generated/comment-response/comm
 import { UpdateOneCommentResponseArgs } from 'src/@generated/comment-response/update-one-comment-response.args';
 import { FindManyCommentResponseArgs } from 'src/@generated/comment-response/find-many-comment-response.args';
 import { CommentResponse } from '../@generated/comment-response/comment-response.model';
+import { CommentResponsePaginatedModel } from './models/find-many-comment-response.model';
+
 
 @Resolver(() => CommentResponse)
 export class CommentResponseResolver {
@@ -17,11 +19,38 @@ export class CommentResponseResolver {
     private prisma: PrismaService,
   ) {}
 
-  @Query(() => [CommentResponse], {nullable: true})
+  @Query(() => CommentResponsePaginatedModel, {nullable: true})
   async CommentResponses(@Args() args: FindManyCommentResponseArgs) {
-    return await this.prisma.commentResponse.findMany(
-      args
-    )
+    const take = args?.take || 10;
+    const skip = args?.skip || 0;
+  
+    const totalItems = await this.prisma.commentResponse.count();
+  
+
+    const totalPages = Math.ceil(totalItems / take);
+  
+
+    const data = await this.prisma.commentResponse.findMany({
+      ...args,
+      take,
+      skip,
+    });
+  
+
+    const hasNextPage = (skip + take) < totalItems;
+    const hasPreviousPage = skip > 0;
+
+    return {
+      pageInfo: {
+        take,
+        hasNextPage,
+        hasPreviousPage,
+        totalPages,
+        totalItems,
+        skip,
+      },
+      nodes: data,
+    };
   }
 
   @Mutation(() => CommentResponse, {name: 'createComment'})

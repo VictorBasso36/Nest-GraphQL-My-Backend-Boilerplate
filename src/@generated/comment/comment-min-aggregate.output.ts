@@ -8,6 +8,9 @@ export class CommentMinAggregate {
     @Field(() => String, {nullable:true})
     id?: string;
 
+    @Field(() => String, {nullable:true})
+    title?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 

@@ -2,6 +2,7 @@ import { registerEnumType } from '@nestjs/graphql';
 
 export enum CommentScalarFieldEnum {
     id = "id",
+    title = "title",
     createdAt = "createdAt",
     updatedAt = "updatedAt",
     content = "content",

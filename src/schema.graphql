@@ -23,14 +23,15 @@ input ChangePasswordInput {
 
 type Comment {
   CommentResponse: [CommentResponse!]
-  Company: Company!
+  Company: Company
   _count: CommentCount!
   approved: Boolean
-  companyId: String!
+  companyId: String
   content: String!
   createdAt: DateTime!
   id: ID!
   rating: Float
+  title: String
   updatedAt: DateTime!
 }
 
@@ -40,12 +41,13 @@ type CommentCount {
 
 input CommentCreateInput {
   CommentResponse: CommentResponseCreateNestedManyWithoutCommentInput
-  Company: CompanyCreateNestedOneWithoutCommentInput!
+  Company: CompanyCreateNestedOneWithoutCommentInput
   approved: Boolean
   content: String!
   createdAt: DateTime
   id: String
   rating: Float
+  title: String
   updatedAt: DateTime
 }
 
@@ -55,6 +57,7 @@ input CommentCreateManyCompanyInput {
   createdAt: DateTime
   id: String
   rating: Float
+  title: String
   updatedAt: DateTime
 }
 
@@ -81,12 +84,13 @@ input CommentCreateOrConnectWithoutCompanyInput {
 }
 
 input CommentCreateWithoutCommentResponseInput {
-  Company: CompanyCreateNestedOneWithoutCommentInput!
+  Company: CompanyCreateNestedOneWithoutCommentInput
   approved: Boolean
   content: String!
   createdAt: DateTime
   id: String
   rating: Float
+  title: String
   updatedAt: DateTime
 }
 
@@ -97,6 +101,7 @@ input CommentCreateWithoutCompanyInput {
   createdAt: DateTime
   id: String
   rating: Float
+  title: String
   updatedAt: DateTime
 }
 
@@ -114,6 +119,7 @@ enum CommentOrderByRelevanceFieldEnum {
   companyId
   content
   id
+  title
 }
 
 input CommentOrderByRelevanceInput {
@@ -127,12 +133,18 @@ input CommentOrderByWithRelationAndSearchRelevanceInput {
   Company: CompanyOrderByWithRelationAndSearchRelevanceInput
   _relevance: CommentOrderByRelevanceInput
   approved: SortOrderInput
-  companyId: SortOrder
+  companyId: SortOrderInput
   content: SortOrder
   createdAt: SortOrder
   id: SortOrder
   rating: SortOrderInput
+  title: SortOrderInput
   updatedAt: SortOrder
+}
+
+type CommentPaginatedModel {
+  nodes: [Comment!]!
+  pageInfo: PageInfo
 }
 
 input CommentRelationFilter {
@@ -214,6 +226,11 @@ input CommentResponseOrderByWithRelationAndSearchRelevanceInput {
   createdAt: SortOrder
   id: SortOrder
   updatedAt: SortOrder
+}
+
+type CommentResponsePaginatedModel {
+  nodes: [CommentResponse!]!
+  pageInfo: PageInfo
 }
 
 enum CommentResponseScalarFieldEnum {
@@ -325,6 +342,7 @@ enum CommentScalarFieldEnum {
   createdAt
   id
   rating
+  title
   updatedAt
 }
 
@@ -333,22 +351,24 @@ input CommentScalarWhereInput {
   NOT: [CommentScalarWhereInput!]
   OR: [CommentScalarWhereInput!]
   approved: BoolNullableFilter
-  companyId: StringFilter
+  companyId: StringNullableFilter
   content: StringFilter
   createdAt: DateTimeFilter
   id: StringFilter
   rating: FloatNullableFilter
+  title: StringNullableFilter
   updatedAt: DateTimeFilter
 }
 
 input CommentUpdateInput {
   CommentResponse: CommentResponseUpdateManyWithoutCommentNestedInput
-  Company: CompanyUpdateOneRequiredWithoutCommentNestedInput
+  Company: CompanyUpdateOneWithoutCommentNestedInput
   approved: NullableBoolFieldUpdateOperationsInput
   content: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   rating: NullableFloatFieldUpdateOperationsInput
+  title: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -358,6 +378,7 @@ input CommentUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   rating: NullableFloatFieldUpdateOperationsInput
+  title: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -399,12 +420,13 @@ input CommentUpdateWithWhereUniqueWithoutCompanyInput {
 }
 
 input CommentUpdateWithoutCommentResponseInput {
-  Company: CompanyUpdateOneRequiredWithoutCommentNestedInput
+  Company: CompanyUpdateOneWithoutCommentNestedInput
   approved: NullableBoolFieldUpdateOperationsInput
   content: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   rating: NullableFloatFieldUpdateOperationsInput
+  title: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -415,6 +437,7 @@ input CommentUpdateWithoutCompanyInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   rating: NullableFloatFieldUpdateOperationsInput
+  title: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
 
@@ -433,30 +456,32 @@ input CommentUpsertWithoutCommentResponseInput {
 input CommentWhereInput {
   AND: [CommentWhereInput!]
   CommentResponse: CommentResponseListRelationFilter
-  Company: CompanyRelationFilter
+  Company: CompanyNullableRelationFilter
   NOT: [CommentWhereInput!]
   OR: [CommentWhereInput!]
   approved: BoolNullableFilter
-  companyId: StringFilter
+  companyId: StringNullableFilter
   content: StringFilter
   createdAt: DateTimeFilter
   id: StringFilter
   rating: FloatNullableFilter
+  title: StringNullableFilter
   updatedAt: DateTimeFilter
 }
 
 input CommentWhereUniqueInput {
   AND: [CommentWhereInput!]
   CommentResponse: CommentResponseListRelationFilter
-  Company: CompanyRelationFilter
+  Company: CompanyNullableRelationFilter
   NOT: [CommentWhereInput!]
   OR: [CommentWhereInput!]
   approved: BoolNullableFilter
-  companyId: StringFilter
+  companyId: StringNullableFilter
   content: StringFilter
   createdAt: DateTimeFilter
   id: String
   rating: FloatNullableFilter
+  title: StringNullableFilter
   updatedAt: DateTimeFilter
 }
 
@@ -571,11 +596,6 @@ type CompanyPaginatedModel {
   pageInfo: PageInfo
 }
 
-input CompanyRelationFilter {
-  is: CompanyWhereInput
-  isNot: CompanyWhereInput
-}
-
 enum CompanyScalarFieldEnum {
   approved
   cnpj
@@ -608,10 +628,12 @@ input CompanyUpdateInput {
   working: NullableStringFieldUpdateOperationsInput
 }
 
-input CompanyUpdateOneRequiredWithoutCommentNestedInput {
+input CompanyUpdateOneWithoutCommentNestedInput {
   connect: CompanyWhereUniqueInput
   connectOrCreate: CompanyCreateOrConnectWithoutCommentInput
   create: CompanyCreateWithoutCommentInput
+  delete: CompanyWhereInput
+  disconnect: CompanyWhereInput
   update: CompanyUpdateToOneWithWhereWithoutCommentInput
   upsert: CompanyUpsertWithoutCommentInput
 }
@@ -899,8 +921,8 @@ type PageInfo {
 }
 
 type Query {
-  CommentResponses(cursor: CommentResponseWhereUniqueInput, distinct: [CommentResponseScalarFieldEnum!], orderBy: [CommentResponseOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CommentResponseWhereInput): [CommentResponse!]
-  comments(cursor: CommentWhereUniqueInput, distinct: [CommentScalarFieldEnum!], orderBy: [CommentOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CommentWhereInput): [Comment!]
+  CommentResponses(cursor: CommentResponseWhereUniqueInput, distinct: [CommentResponseScalarFieldEnum!], orderBy: [CommentResponseOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CommentResponseWhereInput): CommentResponsePaginatedModel
+  comments(cursor: CommentWhereUniqueInput, distinct: [CommentScalarFieldEnum!], orderBy: [CommentOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CommentWhereInput): CommentPaginatedModel
   companys(cursor: CompanyWhereUniqueInput, distinct: [CompanyScalarFieldEnum!], orderBy: [CompanyOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CompanyWhereInput): CompanyPaginatedModel
   findUniqueCompany(where: CompanyWhereUniqueInput!): Company
   hello(name: String!): String!

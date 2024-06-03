@@ -9,6 +9,9 @@ export class CommentUncheckedCreateInput {
     @Field(() => String, {nullable:true})
     id?: string;
 
+    @Field(() => String, {nullable:true})
+    title?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 
@@ -24,8 +27,8 @@ export class CommentUncheckedCreateInput {
     @Field(() => Boolean, {nullable:true})
     approved?: boolean;
 
-    @Field(() => String, {nullable:false})
-    companyId!: string;
+    @Field(() => String, {nullable:true})
+    companyId?: string;
 
     @Field(() => CommentResponseUncheckedCreateNestedManyWithoutCommentInput, {nullable:true})
     CommentResponse?: CommentResponseUncheckedCreateNestedManyWithoutCommentInput;
