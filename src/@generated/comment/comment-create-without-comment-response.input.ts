@@ -9,6 +9,9 @@ export class CommentCreateWithoutCommentResponseInput {
     @Field(() => String, {nullable:true})
     id?: string;
 
+    @Field(() => String, {nullable:true})
+    title?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 
@@ -24,6 +27,6 @@ export class CommentCreateWithoutCommentResponseInput {
     @Field(() => Boolean, {nullable:true})
     approved?: boolean;
 
-    @Field(() => CompanyCreateNestedOneWithoutCommentInput, {nullable:false})
-    Company!: CompanyCreateNestedOneWithoutCommentInput;
+    @Field(() => CompanyCreateNestedOneWithoutCommentInput, {nullable:true})
+    Company?: CompanyCreateNestedOneWithoutCommentInput;
 }

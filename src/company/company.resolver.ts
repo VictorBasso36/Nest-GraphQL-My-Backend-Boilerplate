@@ -41,7 +41,6 @@ export class CompanyResolver {
       take,
       skip,
     });
-  
 
     const hasNextPage = (skip + take) < totalItems;
     const hasPreviousPage = skip > 0;

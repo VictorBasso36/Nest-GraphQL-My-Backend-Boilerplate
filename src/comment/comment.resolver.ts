@@ -34,8 +34,15 @@ export class CommentResolver {
       ...args,
       take,
       skip,
+      include: {
+        Company: {
+          include: {
+            User: true
+          }
+        },
+
+      }
     });
-  
 
     const hasNextPage = (skip + take) < totalItems;
     const hasPreviousPage = skip > 0;

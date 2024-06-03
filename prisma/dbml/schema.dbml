@@ -36,13 +36,14 @@ Table Company {
 
 Table Comment {
   id String [pk]
+  title String
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   content String [not null]
   rating Float
   approved Boolean [default: false]
-  companyId String [not null]
-  Company Company [not null]
+  companyId String
+  Company Company
   CommentResponse CommentResponse [not null]
 }
 

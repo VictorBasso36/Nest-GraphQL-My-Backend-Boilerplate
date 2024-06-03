@@ -9,6 +9,9 @@ export class CommentCountAggregate {
     id!: number;
 
     @Field(() => Int, {nullable:false})
+    title!: number;
+
+    @Field(() => Int, {nullable:false})
     createdAt!: number;
 
     @Field(() => Int, {nullable:false})

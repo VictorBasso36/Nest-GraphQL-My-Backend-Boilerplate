@@ -12,6 +12,9 @@ export class Comment {
     @Field(() => ID, {nullable:false})
     id!: string;
 
+    @Field(() => String, {nullable:true})
+    title!: string | null;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
 
@@ -27,11 +30,11 @@ export class Comment {
     @Field(() => Boolean, {nullable:true,defaultValue:false})
     approved!: boolean | null;
 
-    @Field(() => String, {nullable:false})
-    companyId!: string;
+    @Field(() => String, {nullable:true})
+    companyId!: string | null;
 
-    @Field(() => Company, {nullable:false})
-    Company?: Company;
+    @Field(() => Company, {nullable:true})
+    Company?: Company | null;
 
     @Field(() => [CommentResponse], {nullable:true})
     CommentResponse?: Array<CommentResponse>;

@@ -8,6 +8,9 @@ export class CommentMinAggregateInput {
     id?: true;
 
     @Field(() => Boolean, {nullable:true})
+    title?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})
