@@ -35,6 +35,9 @@ export class CommentOrderByWithAggregationInput {
     @Field(() => SortOrderInput, {nullable:true})
     companyId?: SortOrderInput;
 
+    @Field(() => SortOrderInput, {nullable:true})
+    userId?: SortOrderInput;
+
     @Field(() => CommentCountOrderByAggregateInput, {nullable:true})
     _count?: CommentCountOrderByAggregateInput;
 

@@ -27,4 +27,7 @@ export class CommentMinAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     companyId?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    userId?: true;
 }

@@ -41,4 +41,7 @@ export class CommentScalarWhereWithAggregatesInput {
 
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     companyId?: StringNullableWithAggregatesFilter;
+
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    userId?: StringNullableWithAggregatesFilter;
 }

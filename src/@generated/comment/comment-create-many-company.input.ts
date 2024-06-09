@@ -25,4 +25,7 @@ export class CommentCreateManyCompanyInput {
 
     @Field(() => Boolean, {nullable:true})
     approved?: boolean;
+
+    @Field(() => String, {nullable:true})
+    userId?: string;
 }

@@ -27,6 +27,9 @@ export class CommentUncheckedCreateWithoutCompanyInput {
     @Field(() => Boolean, {nullable:true})
     approved?: boolean;
 
+    @Field(() => String, {nullable:true})
+    userId?: string;
+
     @Field(() => CommentResponseUncheckedCreateNestedManyWithoutCommentInput, {nullable:true})
     CommentResponse?: CommentResponseUncheckedCreateNestedManyWithoutCommentInput;
 }

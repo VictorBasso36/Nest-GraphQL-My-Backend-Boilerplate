@@ -11,7 +11,8 @@ import { UpdateOneCommentResponseArgs } from 'src/@generated/comment-response/up
 import { FindManyCommentResponseArgs } from 'src/@generated/comment-response/find-many-comment-response.args';
 import { CommentResponse } from '../@generated/comment-response/comment-response.model';
 import { CommentResponsePaginatedModel } from './models/find-many-comment-response.model';
-
+import { GqlAuthGuard } from 'src/auth/gql-auth.guard';
+import { UseGuards } from '@nestjs/common';
 
 @Resolver(() => CommentResponse)
 export class CommentResponseResolver {
@@ -53,6 +54,7 @@ export class CommentResponseResolver {
     };
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => CommentResponse, {name: 'createComment'})
   async createCommentResponse(@Args('data') data: CommentResponseCreateInput) {
     return await this.prisma.commentResponse.create({
@@ -63,6 +65,7 @@ export class CommentResponseResolver {
     });
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => CommentResponse, {name: 'updateCommentResponse'})
   async updateCommentResponse(@Args() data: UpdateOneCommentResponseArgs) {
     return await this.prisma.commentResponse.update({

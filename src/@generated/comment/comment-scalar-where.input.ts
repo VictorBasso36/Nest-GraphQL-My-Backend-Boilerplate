@@ -41,4 +41,7 @@ export class CommentScalarWhereInput {
 
     @Field(() => StringNullableFilter, {nullable:true})
     companyId?: StringNullableFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    userId?: StringNullableFilter;
 }

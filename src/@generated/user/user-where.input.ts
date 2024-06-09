@@ -6,6 +6,7 @@ import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 import { EnumRoleFilter } from '../prisma/enum-role-filter.input';
 import { DateTimeNullableFilter } from '../prisma/date-time-nullable-filter.input';
 import { CompanyNullableRelationFilter } from '../company/company-nullable-relation-filter.input';
+import { CommentListRelationFilter } from '../comment/comment-list-relation-filter.input';
 
 @InputType()
 export class UserWhereInput {
@@ -54,4 +55,7 @@ export class UserWhereInput {
 
     @Field(() => CompanyNullableRelationFilter, {nullable:true})
     Company?: CompanyNullableRelationFilter;
+
+    @Field(() => CommentListRelationFilter, {nullable:true})
+    Comment?: CommentListRelationFilter;
 }

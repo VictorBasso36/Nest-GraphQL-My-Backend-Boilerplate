@@ -4,7 +4,8 @@ export enum CommentOrderByRelevanceFieldEnum {
     id = "id",
     title = "title",
     content = "content",
-    companyId = "companyId"
+    companyId = "companyId",
+    userId = "userId"
 }
 
 

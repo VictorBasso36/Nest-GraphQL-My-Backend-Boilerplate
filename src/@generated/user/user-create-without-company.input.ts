@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Role } from '../prisma/role.enum';
+import { CommentCreateNestedManyWithoutUserInput } from '../comment/comment-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateWithoutCompanyInput {
@@ -34,4 +35,7 @@ export class UserCreateWithoutCompanyInput {
 
     @Field(() => Date, {nullable:true})
     resetPasswordExpires?: Date | string;
+
+    @Field(() => CommentCreateNestedManyWithoutUserInput, {nullable:true})
+    Comment?: CommentCreateNestedManyWithoutUserInput;
 }
