@@ -29,5 +29,8 @@ export class CommentCountAggregateInput {
     companyId?: true;
 
     @Field(() => Boolean, {nullable:true})
+    userId?: true;
+
+    @Field(() => Boolean, {nullable:true})
     _all?: true;
 }

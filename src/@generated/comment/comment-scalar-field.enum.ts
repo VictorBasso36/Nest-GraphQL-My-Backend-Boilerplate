@@ -8,7 +8,8 @@ export enum CommentScalarFieldEnum {
     content = "content",
     rating = "rating",
     approved = "approved",
-    companyId = "companyId"
+    companyId = "companyId",
+    userId = "userId"
 }
 
 

@@ -27,4 +27,7 @@ export class CommentMaxAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     companyId?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    userId?: true;
 }

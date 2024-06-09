@@ -6,6 +6,7 @@ import { DateTimeFilter } from '../prisma/date-time-filter.input';
 import { FloatNullableFilter } from '../prisma/float-nullable-filter.input';
 import { BoolNullableFilter } from '../prisma/bool-nullable-filter.input';
 import { CompanyNullableRelationFilter } from '../company/company-nullable-relation-filter.input';
+import { UserNullableRelationFilter } from '../user/user-nullable-relation-filter.input';
 import { CommentResponseListRelationFilter } from '../comment-response/comment-response-list-relation-filter.input';
 
 @InputType()
@@ -44,8 +45,14 @@ export class CommentWhereInput {
     @Field(() => StringNullableFilter, {nullable:true})
     companyId?: StringNullableFilter;
 
+    @Field(() => StringNullableFilter, {nullable:true})
+    userId?: StringNullableFilter;
+
     @Field(() => CompanyNullableRelationFilter, {nullable:true})
     Company?: CompanyNullableRelationFilter;
+
+    @Field(() => UserNullableRelationFilter, {nullable:true})
+    User?: UserNullableRelationFilter;
 
     @Field(() => CommentResponseListRelationFilter, {nullable:true})
     CommentResponse?: CommentResponseListRelationFilter;

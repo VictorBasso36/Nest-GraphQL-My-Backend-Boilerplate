@@ -32,6 +32,7 @@ model User {
   resetPasswordToken   String?   @unique
   resetPasswordExpires DateTime?
   companyId            String?
+  Comment              Comment[]
 }
 
 model Company {
@@ -61,6 +62,8 @@ model Comment {
   approved        Boolean?          @default(false)
   companyId       String?
   Company         Company?           @relation(fields: [companyId], references: [id])
+  userId          String?
+  User            User?             @relation(fields: [userId], references: [id])
   CommentResponse CommentResponse[]
 }
 

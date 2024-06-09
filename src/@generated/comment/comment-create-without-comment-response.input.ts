@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Float } from '@nestjs/graphql';
 import { CompanyCreateNestedOneWithoutCommentInput } from '../company/company-create-nested-one-without-comment.input';
+import { UserCreateNestedOneWithoutCommentInput } from '../user/user-create-nested-one-without-comment.input';
 
 @InputType()
 export class CommentCreateWithoutCommentResponseInput {
@@ -29,4 +30,7 @@ export class CommentCreateWithoutCommentResponseInput {
 
     @Field(() => CompanyCreateNestedOneWithoutCommentInput, {nullable:true})
     Company?: CompanyCreateNestedOneWithoutCommentInput;
+
+    @Field(() => UserCreateNestedOneWithoutCommentInput, {nullable:true})
+    User?: UserCreateNestedOneWithoutCommentInput;
 }

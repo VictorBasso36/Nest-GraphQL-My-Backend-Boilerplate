@@ -5,6 +5,7 @@ import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-str
 import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-update-operations.input';
 import { NullableFloatFieldUpdateOperationsInput } from '../prisma/nullable-float-field-update-operations.input';
 import { NullableBoolFieldUpdateOperationsInput } from '../prisma/nullable-bool-field-update-operations.input';
+import { UserUpdateOneWithoutCommentNestedInput } from '../user/user-update-one-without-comment-nested.input';
 import { CommentResponseUpdateManyWithoutCommentNestedInput } from '../comment-response/comment-response-update-many-without-comment-nested.input';
 
 @InputType()
@@ -30,6 +31,9 @@ export class CommentUpdateWithoutCompanyInput {
 
     @Field(() => NullableBoolFieldUpdateOperationsInput, {nullable:true})
     approved?: NullableBoolFieldUpdateOperationsInput;
+
+    @Field(() => UserUpdateOneWithoutCommentNestedInput, {nullable:true})
+    User?: UserUpdateOneWithoutCommentNestedInput;
 
     @Field(() => CommentResponseUpdateManyWithoutCommentNestedInput, {nullable:true})
     CommentResponse?: CommentResponseUpdateManyWithoutCommentNestedInput;

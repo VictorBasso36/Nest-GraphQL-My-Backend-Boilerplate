@@ -3,6 +3,7 @@ import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
 import { Float } from '@nestjs/graphql';
 import { Company } from '../company/company.model';
+import { User } from '../user/user.model';
 import { CommentResponse } from '../comment-response/comment-response.model';
 import { CommentCount } from './comment-count.output';
 
@@ -33,8 +34,14 @@ export class Comment {
     @Field(() => String, {nullable:true})
     companyId!: string | null;
 
+    @Field(() => String, {nullable:true})
+    userId!: string | null;
+
     @Field(() => Company, {nullable:true})
     Company?: Company | null;
+
+    @Field(() => User, {nullable:true})
+    User?: User | null;
 
     @Field(() => [CommentResponse], {nullable:true})
     CommentResponse?: Array<CommentResponse>;

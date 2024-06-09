@@ -32,4 +32,7 @@ export class CommentUncheckedUpdateWithoutCommentResponseInput {
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     companyId?: NullableStringFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    userId?: NullableStringFieldUpdateOperationsInput;
 }

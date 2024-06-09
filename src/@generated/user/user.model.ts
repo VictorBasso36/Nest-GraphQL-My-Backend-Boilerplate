@@ -3,6 +3,8 @@ import { ObjectType } from '@nestjs/graphql';
 import { ID } from '@nestjs/graphql';
 import { Role } from '../prisma/role.enum';
 import { Company } from '../company/company.model';
+import { Comment } from '../comment/comment.model';
+import { UserCount } from './user-count.output';
 
 @ObjectType()
 export class User {
@@ -42,4 +44,10 @@ export class User {
 
     @Field(() => Company, {nullable:true})
     Company?: Company | null;
+
+    @Field(() => [Comment], {nullable:true})
+    Comment?: Array<Comment>;
+
+    @Field(() => UserCount, {nullable:false})
+    _count?: UserCount;
 }

@@ -28,4 +28,7 @@ export class CommentUncheckedCreateWithoutCommentResponseInput {
 
     @Field(() => String, {nullable:true})
     companyId?: string;
+
+    @Field(() => String, {nullable:true})
+    userId?: string;
 }

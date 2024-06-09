@@ -24,6 +24,7 @@ input ChangePasswordInput {
 type Comment {
   CommentResponse: [CommentResponse!]
   Company: Company
+  User: User
   _count: CommentCount!
   approved: Boolean
   companyId: String
@@ -33,6 +34,7 @@ type Comment {
   rating: Float
   title: String
   updatedAt: DateTime!
+  userId: String
 }
 
 type CommentCount {
@@ -42,6 +44,7 @@ type CommentCount {
 input CommentCreateInput {
   CommentResponse: CommentResponseCreateNestedManyWithoutCommentInput
   Company: CompanyCreateNestedOneWithoutCommentInput
+  User: UserCreateNestedOneWithoutCommentInput
   approved: Boolean
   content: String!
   createdAt: DateTime
@@ -59,10 +62,27 @@ input CommentCreateManyCompanyInput {
   rating: Float
   title: String
   updatedAt: DateTime
+  userId: String
 }
 
 input CommentCreateManyCompanyInputEnvelope {
   data: [CommentCreateManyCompanyInput!]!
+  skipDuplicates: Boolean
+}
+
+input CommentCreateManyUserInput {
+  approved: Boolean
+  companyId: String
+  content: String!
+  createdAt: DateTime
+  id: String
+  rating: Float
+  title: String
+  updatedAt: DateTime
+}
+
+input CommentCreateManyUserInputEnvelope {
+  data: [CommentCreateManyUserInput!]!
   skipDuplicates: Boolean
 }
 
@@ -71,6 +91,13 @@ input CommentCreateNestedManyWithoutCompanyInput {
   connectOrCreate: [CommentCreateOrConnectWithoutCompanyInput!]
   create: [CommentCreateWithoutCompanyInput!]
   createMany: CommentCreateManyCompanyInputEnvelope
+}
+
+input CommentCreateNestedManyWithoutUserInput {
+  connect: [CommentWhereUniqueInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutUserInput!]
+  create: [CommentCreateWithoutUserInput!]
+  createMany: CommentCreateManyUserInputEnvelope
 }
 
 input CommentCreateOrConnectWithoutCommentResponseInput {
@@ -83,8 +110,14 @@ input CommentCreateOrConnectWithoutCompanyInput {
   where: CommentWhereUniqueInput!
 }
 
+input CommentCreateOrConnectWithoutUserInput {
+  create: CommentCreateWithoutUserInput!
+  where: CommentWhereUniqueInput!
+}
+
 input CommentCreateWithoutCommentResponseInput {
   Company: CompanyCreateNestedOneWithoutCommentInput
+  User: UserCreateNestedOneWithoutCommentInput
   approved: Boolean
   content: String!
   createdAt: DateTime
@@ -96,6 +129,19 @@ input CommentCreateWithoutCommentResponseInput {
 
 input CommentCreateWithoutCompanyInput {
   CommentResponse: CommentResponseCreateNestedManyWithoutCommentInput
+  User: UserCreateNestedOneWithoutCommentInput
+  approved: Boolean
+  content: String!
+  createdAt: DateTime
+  id: String
+  rating: Float
+  title: String
+  updatedAt: DateTime
+}
+
+input CommentCreateWithoutUserInput {
+  CommentResponse: CommentResponseCreateNestedManyWithoutCommentInput
+  Company: CompanyCreateNestedOneWithoutCommentInput
   approved: Boolean
   content: String!
   createdAt: DateTime
@@ -120,6 +166,7 @@ enum CommentOrderByRelevanceFieldEnum {
   content
   id
   title
+  userId
 }
 
 input CommentOrderByRelevanceInput {
@@ -131,6 +178,7 @@ input CommentOrderByRelevanceInput {
 input CommentOrderByWithRelationAndSearchRelevanceInput {
   CommentResponse: CommentResponseOrderByRelationAggregateInput
   Company: CompanyOrderByWithRelationAndSearchRelevanceInput
+  User: UserOrderByWithRelationAndSearchRelevanceInput
   _relevance: CommentOrderByRelevanceInput
   approved: SortOrderInput
   companyId: SortOrderInput
@@ -140,6 +188,7 @@ input CommentOrderByWithRelationAndSearchRelevanceInput {
   rating: SortOrderInput
   title: SortOrderInput
   updatedAt: SortOrder
+  userId: SortOrderInput
 }
 
 type CommentPaginatedModel {
@@ -344,6 +393,7 @@ enum CommentScalarFieldEnum {
   rating
   title
   updatedAt
+  userId
 }
 
 input CommentScalarWhereInput {
@@ -358,11 +408,13 @@ input CommentScalarWhereInput {
   rating: FloatNullableFilter
   title: StringNullableFilter
   updatedAt: DateTimeFilter
+  userId: StringNullableFilter
 }
 
 input CommentUpdateInput {
   CommentResponse: CommentResponseUpdateManyWithoutCommentNestedInput
   Company: CompanyUpdateOneWithoutCommentNestedInput
+  User: UserUpdateOneWithoutCommentNestedInput
   approved: NullableBoolFieldUpdateOperationsInput
   content: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -387,6 +439,11 @@ input CommentUpdateManyWithWhereWithoutCompanyInput {
   where: CommentScalarWhereInput!
 }
 
+input CommentUpdateManyWithWhereWithoutUserInput {
+  data: CommentUpdateManyMutationInput!
+  where: CommentScalarWhereInput!
+}
+
 input CommentUpdateManyWithoutCompanyNestedInput {
   connect: [CommentWhereUniqueInput!]
   connectOrCreate: [CommentCreateOrConnectWithoutCompanyInput!]
@@ -399,6 +456,20 @@ input CommentUpdateManyWithoutCompanyNestedInput {
   update: [CommentUpdateWithWhereUniqueWithoutCompanyInput!]
   updateMany: [CommentUpdateManyWithWhereWithoutCompanyInput!]
   upsert: [CommentUpsertWithWhereUniqueWithoutCompanyInput!]
+}
+
+input CommentUpdateManyWithoutUserNestedInput {
+  connect: [CommentWhereUniqueInput!]
+  connectOrCreate: [CommentCreateOrConnectWithoutUserInput!]
+  create: [CommentCreateWithoutUserInput!]
+  createMany: CommentCreateManyUserInputEnvelope
+  delete: [CommentWhereUniqueInput!]
+  deleteMany: [CommentScalarWhereInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  set: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [CommentUpdateManyWithWhereWithoutUserInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutUserInput!]
 }
 
 input CommentUpdateOneRequiredWithoutCommentResponseNestedInput {
@@ -419,8 +490,14 @@ input CommentUpdateWithWhereUniqueWithoutCompanyInput {
   where: CommentWhereUniqueInput!
 }
 
+input CommentUpdateWithWhereUniqueWithoutUserInput {
+  data: CommentUpdateWithoutUserInput!
+  where: CommentWhereUniqueInput!
+}
+
 input CommentUpdateWithoutCommentResponseInput {
   Company: CompanyUpdateOneWithoutCommentNestedInput
+  User: UserUpdateOneWithoutCommentNestedInput
   approved: NullableBoolFieldUpdateOperationsInput
   content: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -432,6 +509,19 @@ input CommentUpdateWithoutCommentResponseInput {
 
 input CommentUpdateWithoutCompanyInput {
   CommentResponse: CommentResponseUpdateManyWithoutCommentNestedInput
+  User: UserUpdateOneWithoutCommentNestedInput
+  approved: NullableBoolFieldUpdateOperationsInput
+  content: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  rating: NullableFloatFieldUpdateOperationsInput
+  title: NullableStringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CommentUpdateWithoutUserInput {
+  CommentResponse: CommentResponseUpdateManyWithoutCommentNestedInput
+  Company: CompanyUpdateOneWithoutCommentNestedInput
   approved: NullableBoolFieldUpdateOperationsInput
   content: StringFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
@@ -447,6 +537,12 @@ input CommentUpsertWithWhereUniqueWithoutCompanyInput {
   where: CommentWhereUniqueInput!
 }
 
+input CommentUpsertWithWhereUniqueWithoutUserInput {
+  create: CommentCreateWithoutUserInput!
+  update: CommentUpdateWithoutUserInput!
+  where: CommentWhereUniqueInput!
+}
+
 input CommentUpsertWithoutCommentResponseInput {
   create: CommentCreateWithoutCommentResponseInput!
   update: CommentUpdateWithoutCommentResponseInput!
@@ -459,6 +555,7 @@ input CommentWhereInput {
   Company: CompanyNullableRelationFilter
   NOT: [CommentWhereInput!]
   OR: [CommentWhereInput!]
+  User: UserNullableRelationFilter
   approved: BoolNullableFilter
   companyId: StringNullableFilter
   content: StringFilter
@@ -467,6 +564,7 @@ input CommentWhereInput {
   rating: FloatNullableFilter
   title: StringNullableFilter
   updatedAt: DateTimeFilter
+  userId: StringNullableFilter
 }
 
 input CommentWhereUniqueInput {
@@ -475,6 +573,7 @@ input CommentWhereUniqueInput {
   Company: CompanyNullableRelationFilter
   NOT: [CommentWhereInput!]
   OR: [CommentWhereInput!]
+  User: UserNullableRelationFilter
   approved: BoolNullableFilter
   companyId: StringNullableFilter
   content: StringFilter
@@ -483,6 +582,7 @@ input CommentWhereUniqueInput {
   rating: FloatNullableFilter
   title: StringNullableFilter
   updatedAt: DateTimeFilter
+  userId: StringNullableFilter
 }
 
 type Company {
@@ -531,13 +631,40 @@ input CompanyCreateNestedOneWithoutCommentInput {
   create: CompanyCreateWithoutCommentInput
 }
 
+input CompanyCreateNestedOneWithoutUserInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutUserInput
+  create: CompanyCreateWithoutUserInput
+}
+
 input CompanyCreateOrConnectWithoutCommentInput {
   create: CompanyCreateWithoutCommentInput!
   where: CompanyWhereUniqueInput!
 }
 
+input CompanyCreateOrConnectWithoutUserInput {
+  create: CompanyCreateWithoutUserInput!
+  where: CompanyWhereUniqueInput!
+}
+
 input CompanyCreateWithoutCommentInput {
   User: UserCreateNestedManyWithoutCompanyInput
+  approved: Boolean
+  cnpj: String!
+  createdAt: DateTime
+  description: String
+  id: String
+  location: String!
+  name: String!
+  rating: Float
+  ratingCount: Int
+  updatedAt: DateTime
+  urlImage: String
+  working: String
+}
+
+input CompanyCreateWithoutUserInput {
+  Comment: CommentCreateNestedManyWithoutCompanyInput
   approved: Boolean
   cnpj: String!
   createdAt: DateTime
@@ -638,8 +765,23 @@ input CompanyUpdateOneWithoutCommentNestedInput {
   upsert: CompanyUpsertWithoutCommentInput
 }
 
+input CompanyUpdateOneWithoutUserNestedInput {
+  connect: CompanyWhereUniqueInput
+  connectOrCreate: CompanyCreateOrConnectWithoutUserInput
+  create: CompanyCreateWithoutUserInput
+  delete: CompanyWhereInput
+  disconnect: CompanyWhereInput
+  update: CompanyUpdateToOneWithWhereWithoutUserInput
+  upsert: CompanyUpsertWithoutUserInput
+}
+
 input CompanyUpdateToOneWithWhereWithoutCommentInput {
   data: CompanyUpdateWithoutCommentInput!
+  where: CompanyWhereInput
+}
+
+input CompanyUpdateToOneWithWhereWithoutUserInput {
+  data: CompanyUpdateWithoutUserInput!
   where: CompanyWhereInput
 }
 
@@ -659,9 +801,31 @@ input CompanyUpdateWithoutCommentInput {
   working: NullableStringFieldUpdateOperationsInput
 }
 
+input CompanyUpdateWithoutUserInput {
+  Comment: CommentUpdateManyWithoutCompanyNestedInput
+  approved: NullableBoolFieldUpdateOperationsInput
+  cnpj: StringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  location: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  rating: NullableFloatFieldUpdateOperationsInput
+  ratingCount: NullableIntFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  urlImage: NullableStringFieldUpdateOperationsInput
+  working: NullableStringFieldUpdateOperationsInput
+}
+
 input CompanyUpsertWithoutCommentInput {
   create: CompanyCreateWithoutCommentInput!
   update: CompanyUpdateWithoutCommentInput!
+  where: CompanyWhereInput
+}
+
+input CompanyUpsertWithoutUserInput {
+  create: CompanyCreateWithoutUserInput!
+  update: CompanyUpdateWithoutUserInput!
   where: CompanyWhereInput
 }
 
@@ -1007,7 +1171,9 @@ input UpdateUserInput {
 }
 
 type User {
+  Comment: [Comment!]
   Company: Company
+  _count: UserCount!
   companyId: String
   createdAt: DateTime!
   email: String!
@@ -1019,6 +1185,10 @@ type User {
   resetPasswordToken: String
   role: Role!
   updatedAt: DateTime!
+}
+
+type UserCount {
+  Comment: Int!
 }
 
 input UserCreateManyCompanyInput {
@@ -1046,12 +1216,38 @@ input UserCreateNestedManyWithoutCompanyInput {
   createMany: UserCreateManyCompanyInputEnvelope
 }
 
+input UserCreateNestedOneWithoutCommentInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCommentInput
+  create: UserCreateWithoutCommentInput
+}
+
+input UserCreateOrConnectWithoutCommentInput {
+  create: UserCreateWithoutCommentInput!
+  where: UserWhereUniqueInput!
+}
+
 input UserCreateOrConnectWithoutCompanyInput {
   create: UserCreateWithoutCompanyInput!
   where: UserWhereUniqueInput!
 }
 
+input UserCreateWithoutCommentInput {
+  Company: CompanyCreateNestedOneWithoutUserInput
+  createdAt: DateTime
+  email: String!
+  firstname: String
+  id: String
+  lastname: String
+  password: String!
+  resetPasswordExpires: DateTime
+  resetPasswordToken: String
+  role: Role!
+  updatedAt: DateTime
+}
+
 input UserCreateWithoutCompanyInput {
+  Comment: CommentCreateNestedManyWithoutUserInput
   createdAt: DateTime
   email: String!
   firstname: String
@@ -1070,8 +1266,46 @@ input UserListRelationFilter {
   some: UserWhereInput
 }
 
+input UserNullableRelationFilter {
+  is: UserWhereInput
+  isNot: UserWhereInput
+}
+
 input UserOrderByRelationAggregateInput {
   _count: SortOrder
+}
+
+enum UserOrderByRelevanceFieldEnum {
+  companyId
+  email
+  firstname
+  id
+  lastname
+  password
+  resetPasswordToken
+}
+
+input UserOrderByRelevanceInput {
+  fields: [UserOrderByRelevanceFieldEnum!]!
+  search: String!
+  sort: SortOrder!
+}
+
+input UserOrderByWithRelationAndSearchRelevanceInput {
+  Comment: CommentOrderByRelationAggregateInput
+  Company: CompanyOrderByWithRelationAndSearchRelevanceInput
+  _relevance: UserOrderByRelevanceInput
+  companyId: SortOrderInput
+  createdAt: SortOrder
+  email: SortOrder
+  firstname: SortOrderInput
+  id: SortOrder
+  lastname: SortOrderInput
+  password: SortOrder
+  resetPasswordExpires: SortOrderInput
+  resetPasswordToken: SortOrderInput
+  role: SortOrder
+  updatedAt: SortOrder
 }
 
 input UserScalarWhereInput {
@@ -1123,12 +1357,42 @@ input UserUpdateManyWithoutCompanyNestedInput {
   upsert: [UserUpsertWithWhereUniqueWithoutCompanyInput!]
 }
 
+input UserUpdateOneWithoutCommentNestedInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCommentInput
+  create: UserCreateWithoutCommentInput
+  delete: UserWhereInput
+  disconnect: UserWhereInput
+  update: UserUpdateToOneWithWhereWithoutCommentInput
+  upsert: UserUpsertWithoutCommentInput
+}
+
+input UserUpdateToOneWithWhereWithoutCommentInput {
+  data: UserUpdateWithoutCommentInput!
+  where: UserWhereInput
+}
+
 input UserUpdateWithWhereUniqueWithoutCompanyInput {
   data: UserUpdateWithoutCompanyInput!
   where: UserWhereUniqueInput!
 }
 
+input UserUpdateWithoutCommentInput {
+  Company: CompanyUpdateOneWithoutUserNestedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstname: NullableStringFieldUpdateOperationsInput
+  id: StringFieldUpdateOperationsInput
+  lastname: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  resetPasswordExpires: NullableDateTimeFieldUpdateOperationsInput
+  resetPasswordToken: NullableStringFieldUpdateOperationsInput
+  role: EnumRoleFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
 input UserUpdateWithoutCompanyInput {
+  Comment: CommentUpdateManyWithoutUserNestedInput
   createdAt: DateTimeFieldUpdateOperationsInput
   email: StringFieldUpdateOperationsInput
   firstname: NullableStringFieldUpdateOperationsInput
@@ -1147,8 +1411,15 @@ input UserUpsertWithWhereUniqueWithoutCompanyInput {
   where: UserWhereUniqueInput!
 }
 
+input UserUpsertWithoutCommentInput {
+  create: UserCreateWithoutCommentInput!
+  update: UserUpdateWithoutCommentInput!
+  where: UserWhereInput
+}
+
 input UserWhereInput {
   AND: [UserWhereInput!]
+  Comment: CommentListRelationFilter
   Company: CompanyNullableRelationFilter
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]
@@ -1167,6 +1438,7 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   AND: [UserWhereInput!]
+  Comment: CommentListRelationFilter
   Company: CompanyNullableRelationFilter
   NOT: [UserWhereInput!]
   OR: [UserWhereInput!]

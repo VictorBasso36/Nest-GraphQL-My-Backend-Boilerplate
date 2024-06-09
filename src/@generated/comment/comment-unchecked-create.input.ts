@@ -30,6 +30,9 @@ export class CommentUncheckedCreateInput {
     @Field(() => String, {nullable:true})
     companyId?: string;
 
+    @Field(() => String, {nullable:true})
+    userId?: string;
+
     @Field(() => CommentResponseUncheckedCreateNestedManyWithoutCommentInput, {nullable:true})
     CommentResponse?: CommentResponseUncheckedCreateNestedManyWithoutCommentInput;
 }

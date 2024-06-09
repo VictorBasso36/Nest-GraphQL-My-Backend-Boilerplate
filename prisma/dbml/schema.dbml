@@ -15,6 +15,7 @@ Table User {
   resetPasswordToken String [unique]
   resetPasswordExpires DateTime
   companyId String
+  Comment Comment [not null]
 }
 
 Table Company {
@@ -44,6 +45,8 @@ Table Comment {
   approved Boolean [default: false]
   companyId String
   Company Company
+  userId String
+  User User
   CommentResponse CommentResponse [not null]
 }
 
@@ -65,5 +68,7 @@ Enum Role {
 Ref: User.companyId > Company.id
 
 Ref: Comment.companyId > Company.id
+
+Ref: Comment.userId > User.id
 
 Ref: CommentResponse.CommentId > Comment.id

@@ -31,6 +31,9 @@ export class CommentUncheckedUpdateWithoutCompanyInput {
     @Field(() => NullableBoolFieldUpdateOperationsInput, {nullable:true})
     approved?: NullableBoolFieldUpdateOperationsInput;
 
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    userId?: NullableStringFieldUpdateOperationsInput;
+
     @Field(() => CommentResponseUncheckedUpdateManyWithoutCommentNestedInput, {nullable:true})
     CommentResponse?: CommentResponseUncheckedUpdateManyWithoutCommentNestedInput;
 }

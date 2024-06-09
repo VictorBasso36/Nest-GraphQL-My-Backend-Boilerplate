@@ -34,6 +34,9 @@ export class CommentGroupBy {
     @Field(() => String, {nullable:true})
     companyId?: string;
 
+    @Field(() => String, {nullable:true})
+    userId?: string;
+
     @Field(() => CommentCountAggregate, {nullable:true})
     _count?: CommentCountAggregate;
 

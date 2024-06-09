@@ -5,7 +5,8 @@ import {
   Args,
   Mutation,
 } from '@nestjs/graphql';
-
+import { GqlAuthGuard } from 'src/auth/gql-auth.guard';
+import { UseGuards } from '@nestjs/common';
 import { CommentCreateInput } from 'src/@generated/comment/comment-create.input';
 import { UpdateOneCommentArgs } from 'src/@generated/comment/update-one-comment.args';
 import { FindManyCommentArgs } from 'src/@generated/comment/find-many-comment.args';
@@ -35,11 +36,8 @@ export class CommentResolver {
       take,
       skip,
       include: {
-        Company: {
-          include: {
-            User: true
-          }
-        },
+        Company: true,
+        User: true
 
       }
     });
@@ -60,8 +58,31 @@ export class CommentResolver {
     };
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Comment, {name: 'createComment'})
   async createComment(@Args('data') data: CommentCreateInput) {
+
+    //get company
+    const company = await this.prisma.company.findUniqueOrThrow({
+      where: {
+        id: data?.Company?.connect?.id
+      }
+    })
+
+    let newRating = data?.rating; 
+
+    let newAverageRating = ((company?.rating * company?.ratingCount) + newRating) / (company?.ratingCount + 1);
+
+    await this.prisma.company.update({
+      where: {
+        id: data?.Company?.connect?.id
+      },
+      data: {
+        ratingCount: company?.ratingCount + 1,
+        rating: newAverageRating 
+      }
+    })
+
     return await this.prisma.comment.create({
       data: {
         ...data,
@@ -70,6 +91,7 @@ export class CommentResolver {
     });
   }
 
+  @UseGuards(GqlAuthGuard)
   @Mutation(() => Comment, {name: 'updateComment'})
   async updateComment(@Args() data: UpdateOneCommentArgs) {
     return await this.prisma.comment.update({
