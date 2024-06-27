@@ -33,7 +33,11 @@ export class CompanyResolver {
     const take = args?.take || 10;
     const skip = args?.skip || 0;
   
-    const totalItems = await this.prisma.company.count();
+    const totalItems = await this.prisma.company.count({
+      where: {
+        approved: true
+      }
+    });
   
 
     const totalPages = Math.ceil(totalItems / take);
