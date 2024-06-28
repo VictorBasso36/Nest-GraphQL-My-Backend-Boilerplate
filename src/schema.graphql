@@ -922,6 +922,15 @@ input FloatNullableFilter {
   notIn: [Float!]
 }
 
+input ForgotPasswordInput {
+  email: String!
+}
+
+type ForgotPasswordResponse {
+  message: String
+  success: Boolean!
+}
+
 input IntNullableFilter {
   equals: Int
   gt: Int
@@ -947,8 +956,10 @@ type Mutation {
   changePassword(data: ChangePasswordInput!): User!
   createComment(data: CommentCreateInput!): Comment!
   createCompany(data: CompanyCreateInput!): Company!
+  forgotPassword(forgotPasswordData: ForgotPasswordInput!): ForgotPasswordResponse!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
+  resetPass(newPassword: String!, token: String!): ResetPassResponse!
   signup(data: SignupInput!): Auth!
   updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment!
   updateCommentResponse(data: CommentResponseUpdateInput!, where: CommentResponseWhereUniqueInput!): CommentResponse!
@@ -1097,6 +1108,11 @@ type Query {
 enum QueryMode {
   default
   insensitive
+}
+
+type ResetPassResponse {
+  message: String!
+  success: Boolean!
 }
 
 enum Role {

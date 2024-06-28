@@ -25,7 +25,9 @@ export class CommentResolver {
     const take = args?.take || 10;
     const skip = args?.skip || 0;
   
-    const totalItems = await this.prisma.comment.count();
+    const totalItems = await this.prisma.comment.count({
+      where: args?.where
+    });
   
 
     const totalPages = Math.ceil(totalItems / take);
@@ -37,7 +39,12 @@ export class CommentResolver {
       skip,
       include: {
         Company: true,
-        User: true
+        User: {
+          include: {
+            Company: true
+          },
+          
+        }
 
       }
     });
