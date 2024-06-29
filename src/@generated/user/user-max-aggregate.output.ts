@@ -18,6 +18,9 @@ export class UserMaxAggregate {
     email?: string;
 
     @Field(() => String, {nullable:true})
+    tel?: string;
+
+    @Field(() => String, {nullable:true})
     password?: string;
 
     @Field(() => String, {nullable:true})

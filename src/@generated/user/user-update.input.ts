@@ -5,8 +5,6 @@ import { DateTimeFieldUpdateOperationsInput } from '../prisma/date-time-field-up
 import { NullableStringFieldUpdateOperationsInput } from '../prisma/nullable-string-field-update-operations.input';
 import { EnumRoleFieldUpdateOperationsInput } from '../prisma/enum-role-field-update-operations.input';
 import { NullableDateTimeFieldUpdateOperationsInput } from '../prisma/nullable-date-time-field-update-operations.input';
-import { CompanyUpdateOneWithoutUserNestedInput } from '../company/company-update-one-without-user-nested.input';
-import { CommentUpdateManyWithoutUserNestedInput } from '../comment/comment-update-many-without-user-nested.input';
 
 @InputType()
 export class UserUpdateInput {
@@ -22,6 +20,9 @@ export class UserUpdateInput {
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     email?: StringFieldUpdateOperationsInput;
+
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    tel?: StringFieldUpdateOperationsInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     password?: StringFieldUpdateOperationsInput;
@@ -41,9 +42,6 @@ export class UserUpdateInput {
     @Field(() => NullableDateTimeFieldUpdateOperationsInput, {nullable:true})
     resetPasswordExpires?: NullableDateTimeFieldUpdateOperationsInput;
 
-    @Field(() => CompanyUpdateOneWithoutUserNestedInput, {nullable:true})
-    Company?: CompanyUpdateOneWithoutUserNestedInput;
-
-    @Field(() => CommentUpdateManyWithoutUserNestedInput, {nullable:true})
-    Comment?: CommentUpdateManyWithoutUserNestedInput;
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    companyId?: NullableStringFieldUpdateOperationsInput;
 }

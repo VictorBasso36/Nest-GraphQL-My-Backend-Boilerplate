@@ -10,9 +10,6 @@ import { UsersModule } from './users/users.module';
 import config from './common/configs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GqlConfigService } from './gql-config.service';
-import { CompanyModule } from './company/company.module';
-import { CommentModule } from './comment/comment.module';
-import { CommentResponseModule } from './comment-response/comment-response.module';
 
 @Module({
   imports: [
@@ -36,10 +33,7 @@ import { CommentResponseModule } from './comment-response/comment-response.modul
       
     }),
     AuthModule,
-    CompanyModule,
     UsersModule,
-    CommentResponseModule,
-    CommentModule
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],

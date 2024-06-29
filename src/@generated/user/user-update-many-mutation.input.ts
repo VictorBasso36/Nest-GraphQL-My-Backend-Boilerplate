@@ -22,6 +22,9 @@ export class UserUpdateManyMutationInput {
     email?: StringFieldUpdateOperationsInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    tel?: StringFieldUpdateOperationsInput;
+
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     password?: StringFieldUpdateOperationsInput;
 
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
@@ -38,4 +41,7 @@ export class UserUpdateManyMutationInput {
 
     @Field(() => NullableDateTimeFieldUpdateOperationsInput, {nullable:true})
     resetPasswordExpires?: NullableDateTimeFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    companyId?: NullableStringFieldUpdateOperationsInput;
 }

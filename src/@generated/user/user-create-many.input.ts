@@ -18,6 +18,9 @@ export class UserCreateManyInput {
     email!: string;
 
     @Field(() => String, {nullable:false})
+    tel!: string;
+
+    @Field(() => String, {nullable:false})
     password!: string;
 
     @Field(() => String, {nullable:true})

@@ -7,68 +7,17 @@ Table User {
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   email String [unique, not null]
+  tel String [not null]
   password String [not null]
   firstname String
   lastname String
-  Company Company
   role Role [not null]
   resetPasswordToken String [unique]
   resetPasswordExpires DateTime
   companyId String
-  Comment Comment [not null]
-}
-
-Table Company {
-  id String [pk]
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
-  cnpj String [unique, not null]
-  location String [not null]
-  description String
-  urlImage String
-  working String
-  approved Boolean [default: false]
-  name String [not null]
-  ratingCount Int [default: 0]
-  rating Float
-  User User [not null]
-  Comment Comment [not null]
-}
-
-Table Comment {
-  id String [pk]
-  title String
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
-  content String [not null]
-  rating Float
-  approved Boolean [default: false]
-  companyId String
-  Company Company
-  userId String
-  User User
-  CommentResponse CommentResponse [not null]
-}
-
-Table CommentResponse {
-  id String [pk]
-  CommentId String [not null]
-  approved Boolean [default: false]
-  Comment Comment [not null]
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
-  content String [not null]
 }
 
 Enum Role {
   ADMIN
   USER
 }
-
-Ref: User.companyId > Company.id
-
-Ref: Comment.companyId > Company.id
-
-Ref: Comment.userId > User.id
-
-Ref: CommentResponse.CommentId > Comment.id

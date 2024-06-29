@@ -1,8 +1,6 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Role } from '../prisma/role.enum';
-import { CompanyCreateNestedOneWithoutUserInput } from '../company/company-create-nested-one-without-user.input';
-import { CommentCreateNestedManyWithoutUserInput } from '../comment/comment-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateInput {
@@ -18,6 +16,9 @@ export class UserCreateInput {
 
     @Field(() => String, {nullable:false})
     email!: string;
+
+    @Field(() => String, {nullable:false})
+    tel!: string;
 
     @Field(() => String, {nullable:false})
     password!: string;
@@ -37,9 +38,6 @@ export class UserCreateInput {
     @Field(() => Date, {nullable:true})
     resetPasswordExpires?: Date | string;
 
-    @Field(() => CompanyCreateNestedOneWithoutUserInput, {nullable:true})
-    Company?: CompanyCreateNestedOneWithoutUserInput;
-
-    @Field(() => CommentCreateNestedManyWithoutUserInput, {nullable:true})
-    Comment?: CommentCreateNestedManyWithoutUserInput;
+    @Field(() => String, {nullable:true})
+    companyId?: string;
 }

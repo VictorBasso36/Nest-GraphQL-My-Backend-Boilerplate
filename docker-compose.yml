@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   nest-api:
-    container_name: nest-api
+    container_name: nest-api-nexo
     build:
       context: .
       dockerfile: Dockerfile
@@ -16,7 +16,7 @@ services:
 
   postgres:
     image: postgres:15
-    container_name: postgres
+    container_name: postgres-nexo
     restart: always
     ports:
       - '5432:5432'
@@ -27,6 +27,6 @@ services:
 
 volumes:
   postgres:
-    name: nest-db
+    name: nest-db-nexo
   uploads:
     name: nest-uploads
