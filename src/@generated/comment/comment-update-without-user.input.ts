@@ -17,6 +17,9 @@ export class CommentUpdateWithoutUserInput {
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     title?: NullableStringFieldUpdateOperationsInput;
 
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    serviceType?: NullableStringFieldUpdateOperationsInput;
+
     @Field(() => DateTimeFieldUpdateOperationsInput, {nullable:true})
     createdAt?: DateTimeFieldUpdateOperationsInput;
 
@@ -31,6 +34,9 @@ export class CommentUpdateWithoutUserInput {
 
     @Field(() => NullableBoolFieldUpdateOperationsInput, {nullable:true})
     approved?: NullableBoolFieldUpdateOperationsInput;
+
+    @Field(() => NullableBoolFieldUpdateOperationsInput, {nullable:true})
+    removed?: NullableBoolFieldUpdateOperationsInput;
 
     @Field(() => CompanyUpdateOneWithoutCommentNestedInput, {nullable:true})
     Company?: CompanyUpdateOneWithoutCommentNestedInput;

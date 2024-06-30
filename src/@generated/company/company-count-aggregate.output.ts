@@ -33,6 +33,9 @@ export class CompanyCountAggregate {
     approved!: number;
 
     @Field(() => Int, {nullable:false})
+    removed!: number;
+
+    @Field(() => Int, {nullable:false})
     name!: number;
 
     @Field(() => Int, {nullable:false})

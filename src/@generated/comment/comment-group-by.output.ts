@@ -16,6 +16,9 @@ export class CommentGroupBy {
     @Field(() => String, {nullable:true})
     title?: string;
 
+    @Field(() => String, {nullable:true})
+    serviceType?: string;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date | string;
 
@@ -30,6 +33,9 @@ export class CommentGroupBy {
 
     @Field(() => Boolean, {nullable:true})
     approved?: boolean;
+
+    @Field(() => Boolean, {nullable:true})
+    removed?: boolean;
 
     @Field(() => String, {nullable:true})
     companyId?: string;

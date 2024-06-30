@@ -12,6 +12,9 @@ export class CommentMaxOrderByAggregateInput {
     title?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    serviceType?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
@@ -25,6 +28,9 @@ export class CommentMaxOrderByAggregateInput {
 
     @Field(() => SortOrder, {nullable:true})
     approved?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    removed?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     companyId?: keyof typeof SortOrder;

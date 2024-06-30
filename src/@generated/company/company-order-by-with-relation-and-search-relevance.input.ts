@@ -36,6 +36,9 @@ export class CompanyOrderByWithRelationAndSearchRelevanceInput {
     @Field(() => SortOrderInput, {nullable:true})
     approved?: SortOrderInput;
 
+    @Field(() => SortOrderInput, {nullable:true})
+    removed?: SortOrderInput;
+
     @Field(() => SortOrder, {nullable:true})
     name?: keyof typeof SortOrder;
 

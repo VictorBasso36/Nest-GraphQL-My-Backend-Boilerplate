@@ -10,6 +10,7 @@ export enum CompanyScalarFieldEnum {
     urlImage = "urlImage",
     working = "working",
     approved = "approved",
+    removed = "removed",
     name = "name",
     ratingCount = "ratingCount",
     rating = "rating"

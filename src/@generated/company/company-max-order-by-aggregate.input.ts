@@ -33,6 +33,9 @@ export class CompanyMaxOrderByAggregateInput {
     approved?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    removed?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     name?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

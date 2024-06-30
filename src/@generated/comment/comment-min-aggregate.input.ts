@@ -11,6 +11,9 @@ export class CommentMinAggregateInput {
     title?: true;
 
     @Field(() => Boolean, {nullable:true})
+    serviceType?: true;
+
+    @Field(() => Boolean, {nullable:true})
     createdAt?: true;
 
     @Field(() => Boolean, {nullable:true})
@@ -24,6 +27,9 @@ export class CommentMinAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     approved?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    removed?: true;
 
     @Field(() => Boolean, {nullable:true})
     companyId?: true;

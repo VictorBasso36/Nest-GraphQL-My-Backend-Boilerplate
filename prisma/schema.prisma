@@ -44,7 +44,8 @@ model Company {
   description String?    
   urlImage    String?   
   working     String?
-  approved    Boolean?  @default(false)
+  approved    Boolean?          @default(false)
+  removed     Boolean?          @default(false)
   name        String
   ratingCount Int?      @default(0)
   rating      Float?
@@ -55,11 +56,13 @@ model Company {
 model Comment {
   id              String            @id @default(cuid())
   title           String?           
+  serviceType     String?
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
   content         String
   rating          Float?
   approved        Boolean?          @default(false)
+  removed         Boolean?          @default(false)
   companyId       String?
   Company         Company?           @relation(fields: [companyId], references: [id])
   userId          String?

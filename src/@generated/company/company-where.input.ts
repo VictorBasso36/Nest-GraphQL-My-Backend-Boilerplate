@@ -48,6 +48,9 @@ export class CompanyWhereInput {
     @Field(() => BoolNullableFilter, {nullable:true})
     approved?: BoolNullableFilter;
 
+    @Field(() => BoolNullableFilter, {nullable:true})
+    removed?: BoolNullableFilter;
+
     @Field(() => StringFilter, {nullable:true})
     name?: StringFilter;
 

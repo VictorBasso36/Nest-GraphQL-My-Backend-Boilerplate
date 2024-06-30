@@ -38,6 +38,9 @@ export class CompanyGroupBy {
     @Field(() => Boolean, {nullable:true})
     approved?: boolean;
 
+    @Field(() => Boolean, {nullable:true})
+    removed?: boolean;
+
     @Field(() => String, {nullable:false})
     name!: string;
 

@@ -46,6 +46,9 @@ export class CompanyScalarWhereWithAggregatesInput {
     @Field(() => BoolNullableWithAggregatesFilter, {nullable:true})
     approved?: BoolNullableWithAggregatesFilter;
 
+    @Field(() => BoolNullableWithAggregatesFilter, {nullable:true})
+    removed?: BoolNullableWithAggregatesFilter;
+
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     name?: StringWithAggregatesFilter;
 

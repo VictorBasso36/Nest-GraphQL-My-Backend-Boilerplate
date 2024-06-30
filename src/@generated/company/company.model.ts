@@ -37,6 +37,9 @@ export class Company {
     @Field(() => Boolean, {nullable:true,defaultValue:false})
     approved!: boolean | null;
 
+    @Field(() => Boolean, {nullable:true,defaultValue:false})
+    removed!: boolean | null;
+
     @Field(() => String, {nullable:false})
     name!: string;
 

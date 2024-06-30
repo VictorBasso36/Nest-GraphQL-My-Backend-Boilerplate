@@ -32,6 +32,9 @@ export class CompanyCountAggregateInput {
     approved?: true;
 
     @Field(() => Boolean, {nullable:true})
+    removed?: true;
+
+    @Field(() => Boolean, {nullable:true})
     name?: true;
 
     @Field(() => Boolean, {nullable:true})

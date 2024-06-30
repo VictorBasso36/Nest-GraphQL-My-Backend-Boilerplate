@@ -16,6 +16,9 @@ export class CommentOrderByWithRelationAndSearchRelevanceInput {
     @Field(() => SortOrderInput, {nullable:true})
     title?: SortOrderInput;
 
+    @Field(() => SortOrderInput, {nullable:true})
+    serviceType?: SortOrderInput;
+
     @Field(() => SortOrder, {nullable:true})
     createdAt?: keyof typeof SortOrder;
 
@@ -30,6 +33,9 @@ export class CommentOrderByWithRelationAndSearchRelevanceInput {
 
     @Field(() => SortOrderInput, {nullable:true})
     approved?: SortOrderInput;
+
+    @Field(() => SortOrderInput, {nullable:true})
+    removed?: SortOrderInput;
 
     @Field(() => SortOrderInput, {nullable:true})
     companyId?: SortOrderInput;

@@ -32,6 +32,8 @@ type Comment {
   createdAt: DateTime!
   id: ID!
   rating: Float
+  removed: Boolean
+  serviceType: String
   title: String
   updatedAt: DateTime!
   userId: String
@@ -50,6 +52,8 @@ input CommentCreateInput {
   createdAt: DateTime
   id: String
   rating: Float
+  removed: Boolean
+  serviceType: String
   title: String
   updatedAt: DateTime
 }
@@ -60,6 +64,8 @@ input CommentCreateManyCompanyInput {
   createdAt: DateTime
   id: String
   rating: Float
+  removed: Boolean
+  serviceType: String
   title: String
   updatedAt: DateTime
   userId: String
@@ -77,6 +83,8 @@ input CommentCreateManyUserInput {
   createdAt: DateTime
   id: String
   rating: Float
+  removed: Boolean
+  serviceType: String
   title: String
   updatedAt: DateTime
 }
@@ -123,6 +131,8 @@ input CommentCreateWithoutCommentResponseInput {
   createdAt: DateTime
   id: String
   rating: Float
+  removed: Boolean
+  serviceType: String
   title: String
   updatedAt: DateTime
 }
@@ -135,6 +145,8 @@ input CommentCreateWithoutCompanyInput {
   createdAt: DateTime
   id: String
   rating: Float
+  removed: Boolean
+  serviceType: String
   title: String
   updatedAt: DateTime
 }
@@ -147,6 +159,8 @@ input CommentCreateWithoutUserInput {
   createdAt: DateTime
   id: String
   rating: Float
+  removed: Boolean
+  serviceType: String
   title: String
   updatedAt: DateTime
 }
@@ -165,6 +179,7 @@ enum CommentOrderByRelevanceFieldEnum {
   companyId
   content
   id
+  serviceType
   title
   userId
 }
@@ -186,6 +201,8 @@ input CommentOrderByWithRelationAndSearchRelevanceInput {
   createdAt: SortOrder
   id: SortOrder
   rating: SortOrderInput
+  removed: SortOrderInput
+  serviceType: SortOrderInput
   title: SortOrderInput
   updatedAt: SortOrder
   userId: SortOrderInput
@@ -391,6 +408,8 @@ enum CommentScalarFieldEnum {
   createdAt
   id
   rating
+  removed
+  serviceType
   title
   updatedAt
   userId
@@ -406,6 +425,8 @@ input CommentScalarWhereInput {
   createdAt: DateTimeFilter
   id: StringFilter
   rating: FloatNullableFilter
+  removed: BoolNullableFilter
+  serviceType: StringNullableFilter
   title: StringNullableFilter
   updatedAt: DateTimeFilter
   userId: StringNullableFilter
@@ -420,6 +441,8 @@ input CommentUpdateInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   rating: NullableFloatFieldUpdateOperationsInput
+  removed: NullableBoolFieldUpdateOperationsInput
+  serviceType: NullableStringFieldUpdateOperationsInput
   title: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -430,6 +453,8 @@ input CommentUpdateManyMutationInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   rating: NullableFloatFieldUpdateOperationsInput
+  removed: NullableBoolFieldUpdateOperationsInput
+  serviceType: NullableStringFieldUpdateOperationsInput
   title: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -503,6 +528,8 @@ input CommentUpdateWithoutCommentResponseInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   rating: NullableFloatFieldUpdateOperationsInput
+  removed: NullableBoolFieldUpdateOperationsInput
+  serviceType: NullableStringFieldUpdateOperationsInput
   title: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -515,6 +542,8 @@ input CommentUpdateWithoutCompanyInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   rating: NullableFloatFieldUpdateOperationsInput
+  removed: NullableBoolFieldUpdateOperationsInput
+  serviceType: NullableStringFieldUpdateOperationsInput
   title: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -527,6 +556,8 @@ input CommentUpdateWithoutUserInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   id: StringFieldUpdateOperationsInput
   rating: NullableFloatFieldUpdateOperationsInput
+  removed: NullableBoolFieldUpdateOperationsInput
+  serviceType: NullableStringFieldUpdateOperationsInput
   title: NullableStringFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
 }
@@ -562,6 +593,8 @@ input CommentWhereInput {
   createdAt: DateTimeFilter
   id: StringFilter
   rating: FloatNullableFilter
+  removed: BoolNullableFilter
+  serviceType: StringNullableFilter
   title: StringNullableFilter
   updatedAt: DateTimeFilter
   userId: StringNullableFilter
@@ -580,6 +613,8 @@ input CommentWhereUniqueInput {
   createdAt: DateTimeFilter
   id: String
   rating: FloatNullableFilter
+  removed: BoolNullableFilter
+  serviceType: StringNullableFilter
   title: StringNullableFilter
   updatedAt: DateTimeFilter
   userId: StringNullableFilter
@@ -598,6 +633,7 @@ type Company {
   name: String!
   rating: Float
   ratingCount: Int
+  removed: Boolean
   updatedAt: DateTime!
   urlImage: String
   working: String
@@ -620,6 +656,7 @@ input CompanyCreateInput {
   name: String!
   rating: Float
   ratingCount: Int
+  removed: Boolean
   updatedAt: DateTime
   urlImage: String
   working: String
@@ -658,6 +695,7 @@ input CompanyCreateWithoutCommentInput {
   name: String!
   rating: Float
   ratingCount: Int
+  removed: Boolean
   updatedAt: DateTime
   urlImage: String
   working: String
@@ -674,6 +712,7 @@ input CompanyCreateWithoutUserInput {
   name: String!
   rating: Float
   ratingCount: Int
+  removed: Boolean
   updatedAt: DateTime
   urlImage: String
   working: String
@@ -713,6 +752,7 @@ input CompanyOrderByWithRelationAndSearchRelevanceInput {
   name: SortOrder
   rating: SortOrderInput
   ratingCount: SortOrderInput
+  removed: SortOrderInput
   updatedAt: SortOrder
   urlImage: SortOrderInput
   working: SortOrderInput
@@ -733,6 +773,7 @@ enum CompanyScalarFieldEnum {
   name
   rating
   ratingCount
+  removed
   updatedAt
   urlImage
   working
@@ -750,6 +791,7 @@ input CompanyUpdateInput {
   name: StringFieldUpdateOperationsInput
   rating: NullableFloatFieldUpdateOperationsInput
   ratingCount: NullableIntFieldUpdateOperationsInput
+  removed: NullableBoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   urlImage: NullableStringFieldUpdateOperationsInput
   working: NullableStringFieldUpdateOperationsInput
@@ -796,6 +838,7 @@ input CompanyUpdateWithoutCommentInput {
   name: StringFieldUpdateOperationsInput
   rating: NullableFloatFieldUpdateOperationsInput
   ratingCount: NullableIntFieldUpdateOperationsInput
+  removed: NullableBoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   urlImage: NullableStringFieldUpdateOperationsInput
   working: NullableStringFieldUpdateOperationsInput
@@ -812,6 +855,7 @@ input CompanyUpdateWithoutUserInput {
   name: StringFieldUpdateOperationsInput
   rating: NullableFloatFieldUpdateOperationsInput
   ratingCount: NullableIntFieldUpdateOperationsInput
+  removed: NullableBoolFieldUpdateOperationsInput
   updatedAt: DateTimeFieldUpdateOperationsInput
   urlImage: NullableStringFieldUpdateOperationsInput
   working: NullableStringFieldUpdateOperationsInput
@@ -844,6 +888,7 @@ input CompanyWhereInput {
   name: StringFilter
   rating: FloatNullableFilter
   ratingCount: IntNullableFilter
+  removed: BoolNullableFilter
   updatedAt: DateTimeFilter
   urlImage: StringNullableFilter
   working: StringNullableFilter
@@ -864,6 +909,7 @@ input CompanyWhereUniqueInput {
   name: StringFilter
   rating: FloatNullableFilter
   ratingCount: IntNullableFilter
+  removed: BoolNullableFilter
   updatedAt: DateTimeFilter
   urlImage: StringNullableFilter
   working: StringNullableFilter

@@ -16,6 +16,9 @@ export class Comment {
     @Field(() => String, {nullable:true})
     title!: string | null;
 
+    @Field(() => String, {nullable:true})
+    serviceType!: string | null;
+
     @Field(() => Date, {nullable:false})
     createdAt!: Date;
 
@@ -30,6 +33,9 @@ export class Comment {
 
     @Field(() => Boolean, {nullable:true,defaultValue:false})
     approved!: boolean | null;
+
+    @Field(() => Boolean, {nullable:true,defaultValue:false})
+    removed!: boolean | null;
 
     @Field(() => String, {nullable:true})
     companyId!: string | null;

@@ -24,6 +24,9 @@ export class CommentScalarWhereWithAggregatesInput {
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     title?: StringNullableWithAggregatesFilter;
 
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    serviceType?: StringNullableWithAggregatesFilter;
+
     @Field(() => DateTimeWithAggregatesFilter, {nullable:true})
     createdAt?: DateTimeWithAggregatesFilter;
 
@@ -38,6 +41,9 @@ export class CommentScalarWhereWithAggregatesInput {
 
     @Field(() => BoolNullableWithAggregatesFilter, {nullable:true})
     approved?: BoolNullableWithAggregatesFilter;
+
+    @Field(() => BoolNullableWithAggregatesFilter, {nullable:true})
+    removed?: BoolNullableWithAggregatesFilter;
 
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     companyId?: StringNullableWithAggregatesFilter;

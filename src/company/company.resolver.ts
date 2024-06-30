@@ -104,14 +104,15 @@ export class CompanyResolver {
 
     console.log(company?.id)
 
-    if(user?.companyId !== company?.id) throw 'esse usuario nn pertence a essa empresa'
-
+    if(user?.companyId !== company?.id) {
+      if(user?.role !== 'ADMIN') throw 'esse usuario nn pertence a essa empresa'
+    }
+    console.log('this',data?.data?.approved)
     return await this.prisma.company.update({
       data: {
         ...data?.data,
-        approved: company?.approved,
         rating: company?.rating,
-        ratingCount: company?.ratingCount
+        ratingCount: company?.ratingCount,
       },
       where: data?.where
     });

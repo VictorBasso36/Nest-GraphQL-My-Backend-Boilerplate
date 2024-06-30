@@ -12,6 +12,9 @@ export class CommentUncheckedCreateWithoutUserInput {
     @Field(() => String, {nullable:true})
     title?: string;
 
+    @Field(() => String, {nullable:true})
+    serviceType?: string;
+
     @Field(() => Date, {nullable:true})
     createdAt?: Date | string;
 
@@ -26,6 +29,9 @@ export class CommentUncheckedCreateWithoutUserInput {
 
     @Field(() => Boolean, {nullable:true})
     approved?: boolean;
+
+    @Field(() => Boolean, {nullable:true})
+    removed?: boolean;
 
     @Field(() => String, {nullable:true})
     companyId?: string;

@@ -27,6 +27,9 @@ export class CommentWhereInput {
     @Field(() => StringNullableFilter, {nullable:true})
     title?: StringNullableFilter;
 
+    @Field(() => StringNullableFilter, {nullable:true})
+    serviceType?: StringNullableFilter;
+
     @Field(() => DateTimeFilter, {nullable:true})
     createdAt?: DateTimeFilter;
 
@@ -41,6 +44,9 @@ export class CommentWhereInput {
 
     @Field(() => BoolNullableFilter, {nullable:true})
     approved?: BoolNullableFilter;
+
+    @Field(() => BoolNullableFilter, {nullable:true})
+    removed?: BoolNullableFilter;
 
     @Field(() => StringNullableFilter, {nullable:true})
     companyId?: StringNullableFilter;

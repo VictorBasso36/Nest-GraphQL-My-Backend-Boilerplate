@@ -39,6 +39,9 @@ export class CompanyUpdateInput {
     @Field(() => NullableBoolFieldUpdateOperationsInput, {nullable:true})
     approved?: NullableBoolFieldUpdateOperationsInput;
 
+    @Field(() => NullableBoolFieldUpdateOperationsInput, {nullable:true})
+    removed?: NullableBoolFieldUpdateOperationsInput;
+
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     name?: StringFieldUpdateOperationsInput;
 
