@@ -20,19 +20,20 @@ generator nestgraphql {
 }
 
 model User {
-  id                   String    @id @default(cuid())
-  createdAt            DateTime  @default(now())
-  updatedAt            DateTime  @updatedAt
-  email                String    @unique
-  password             String
-  firstname            String?
-  lastname             String?
-  Company              Company?  @relation(fields: [companyId], references: [id])
-  role                 Role
-  resetPasswordToken   String?   @unique
-  resetPasswordExpires DateTime?
-  companyId            String?
-  Comment              Comment[]
+  id                    String                  @id @default(cuid())
+  createdAt             DateTime                @default(now())
+  updatedAt             DateTime                @updatedAt
+  email                 String                  @unique
+  password              String
+  firstname             String?
+  lastname              String?
+  Company               Company?                @relation(fields: [companyId], references: [id])
+  role                  Role
+  resetPasswordToken    String?                 @unique
+  resetPasswordExpires  DateTime?
+  companyId             String?
+  Comment               Comment[]
+  CommentWithoutCompany CommentWithoutCompany[]
 }
 
 model Company {
@@ -41,11 +42,11 @@ model Company {
   updatedAt   DateTime  @updatedAt
   cnpj        String    @unique
   location    String
-  description String?    
-  urlImage    String?   
+  description String?
+  urlImage    String?
   working     String?
-  approved    Boolean?          @default(false)
-  removed     Boolean?          @default(false)
+  approved    Boolean?  @default(false)
+  removed     Boolean?  @default(false)
   name        String
   ratingCount Int?      @default(0)
   rating      Float?
@@ -55,7 +56,7 @@ model Company {
 
 model Comment {
   id              String            @id @default(cuid())
-  title           String?           
+  title           String?
   serviceType     String?
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @updatedAt
@@ -64,7 +65,7 @@ model Comment {
   approved        Boolean?          @default(false)
   removed         Boolean?          @default(false)
   companyId       String?
-  Company         Company?           @relation(fields: [companyId], references: [id])
+  Company         Company?          @relation(fields: [companyId], references: [id])
   userId          String?
   User            User?             @relation(fields: [userId], references: [id])
   CommentResponse CommentResponse[]
@@ -78,6 +79,19 @@ model CommentResponse {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   content   String
+}
+
+model CommentWithoutCompany {
+  id          String   @id @default(cuid())
+  cnpj        String
+  rating      Float?
+  title       String?
+  serviceType String?
+  content     String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String?
+  User        User?    @relation(fields: [userId], references: [id])
 }
 
 enum Role {

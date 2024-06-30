@@ -2,6 +2,7 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Role } from '../prisma/role.enum';
 import { CompanyCreateNestedOneWithoutUserInput } from '../company/company-create-nested-one-without-user.input';
+import { CommentWithoutCompanyCreateNestedManyWithoutUserInput } from '../comment-without-company/comment-without-company-create-nested-many-without-user.input';
 
 @InputType()
 export class UserCreateWithoutCommentInput {
@@ -38,4 +39,7 @@ export class UserCreateWithoutCommentInput {
 
     @Field(() => CompanyCreateNestedOneWithoutUserInput, {nullable:true})
     Company?: CompanyCreateNestedOneWithoutUserInput;
+
+    @Field(() => CommentWithoutCompanyCreateNestedManyWithoutUserInput, {nullable:true})
+    CommentWithoutCompany?: CommentWithoutCompanyCreateNestedManyWithoutUserInput;
 }

@@ -16,6 +16,7 @@ Table User {
   resetPasswordExpires DateTime
   companyId String
   Comment Comment [not null]
+  CommentWithoutCompany CommentWithoutCompany [not null]
 }
 
 Table Company {
@@ -63,6 +64,19 @@ Table CommentResponse {
   content String [not null]
 }
 
+Table CommentWithoutCompany {
+  id String [pk]
+  cnpj String [not null]
+  rating Float
+  title String
+  serviceType String
+  content String [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  userId String
+  User User
+}
+
 Enum Role {
   ADMIN
   USER
@@ -75,3 +89,5 @@ Ref: Comment.companyId > Company.id
 Ref: Comment.userId > User.id
 
 Ref: CommentResponse.CommentId > Comment.id
+
+Ref: CommentWithoutCompany.userId > User.id

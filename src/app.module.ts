@@ -13,6 +13,7 @@ import { GqlConfigService } from './gql-config.service';
 import { CompanyModule } from './company/company.module';
 import { CommentModule } from './comment/comment.module';
 import { CommentResponseModule } from './comment-response/comment-response.module';
+import { CommentWithoutModule } from './comment-without/comment-without.module';
 
 @Module({
   imports: [
@@ -39,7 +40,8 @@ import { CommentResponseModule } from './comment-response/comment-response.modul
     CompanyModule,
     UsersModule,
     CommentResponseModule,
-    CommentModule
+    CommentModule,
+    CommentWithoutModule
   ],
   controllers: [AppController],
   providers: [AppService, AppResolver],

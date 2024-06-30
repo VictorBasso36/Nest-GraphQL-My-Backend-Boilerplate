@@ -4,6 +4,7 @@ import { ID } from '@nestjs/graphql';
 import { Role } from '../prisma/role.enum';
 import { Company } from '../company/company.model';
 import { Comment } from '../comment/comment.model';
+import { CommentWithoutCompany } from '../comment-without-company/comment-without-company.model';
 import { UserCount } from './user-count.output';
 
 @ObjectType()
@@ -47,6 +48,9 @@ export class User {
 
     @Field(() => [Comment], {nullable:true})
     Comment?: Array<Comment>;
+
+    @Field(() => [CommentWithoutCompany], {nullable:true})
+    CommentWithoutCompany?: Array<CommentWithoutCompany>;
 
     @Field(() => UserCount, {nullable:false})
     _count?: UserCount;
