@@ -18,3 +18,16 @@ export class SignupInput {
   @Field({ nullable: true })
   lastname?: string;
 }
+
+@InputType()
+export class toAdmin {
+  @Field()
+  @IsEmail()
+  email: string;
+
+  @Field()
+  @IsNotEmpty()
+  @MinLength(8)
+  password: string;
+}
+

@@ -1244,6 +1244,7 @@ type Mutation {
   updateCommentWithout(data: CommentWithoutCompanyUpdateInput!, where: CommentWithoutCompanyWhereUniqueInput!): CommentWithoutCompany!
   updateCompany(data: CompanyUpdateInput!, where: CompanyWhereUniqueInput!): Company!
   updateUser(data: UpdateUserInput!): User!
+  usertoadmin(data: toAdmin!): User!
 }
 
 input NestedBoolNullableFilter {
@@ -1820,4 +1821,9 @@ input UserWhereUniqueInput {
   resetPasswordToken: String
   role: EnumRoleFilter
   updatedAt: DateTimeFilter
+}
+
+input toAdmin {
+  email: String!
+  password: String!
 }

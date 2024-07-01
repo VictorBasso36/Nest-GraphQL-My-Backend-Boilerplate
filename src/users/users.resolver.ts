@@ -17,6 +17,7 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { ForgotPasswordInput, ForgotPasswordResponse } from './dto/forgot-password.input';
 import { uuid } from 'uuidv4';
 import nodemailer from 'nodemailer';
+import { toAdmin } from 'src/auth/dto/signup.input';
 
 @Resolver(() => User)
 @UseGuards(GqlAuthGuard)
@@ -52,4 +53,21 @@ export class UsersResolver {
       changePassword,
     );
   }  
+
+  @Mutation(() => User, {name: 'usertoadmin'})
+  async usertoadmin(@Args('data') data: toAdmin){
+    const pass = process.env.toadminpass
+    if(pass === data?.password) {
+      return await this.prisma.user.update({
+        where: {
+          email: data?.email
+        },
+        data: {
+          role: {
+            set: 'ADMIN'
+          }
+        }
+      })
+    }
+  }
 }
