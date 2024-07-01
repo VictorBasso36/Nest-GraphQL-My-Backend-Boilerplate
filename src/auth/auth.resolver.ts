@@ -50,7 +50,7 @@ export class AuthResolver {
       },
     });
   
-    const resetPasswordUrl = `https://seufrontend.com/reset-password?token=${resetToken}`;
+    const resetPasswordUrl = `https://www.reclamesolar.com/refresh-password?token=${resetToken}`;
   
     const transporter = nodemailer.createTransport({
       service: "Gmail",
@@ -66,7 +66,7 @@ export class AuthResolver {
     const mailOptions = {
       from: process.env.SMTP_EMAIL,
       to: forgotPasswordData?.email,
-      subject: 'Raeclame Solar - Redefinição de senha',
+      subject: 'Reclame Solar - Redefinição de senha',
       html: `
         <p>Você solicitou a redefinição de sua senha. Clique no link abaixo para redefinir sua senha:</p>
         <a href="${resetPasswordUrl}">Redefinir senha</a>
