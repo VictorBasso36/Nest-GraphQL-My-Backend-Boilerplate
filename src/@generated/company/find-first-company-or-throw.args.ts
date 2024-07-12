@@ -19,7 +19,7 @@ export class FindFirstCompanyOrThrowArgs {
     orderBy?: Array<CompanyOrderByWithRelationAndSearchRelevanceInput>;
 
     @Field(() => CompanyWhereUniqueInput, {nullable:true})
-    cursor?: Prisma.AtLeast<CompanyWhereUniqueInput, 'id' | 'cnpj'>;
+    cursor?: Prisma.AtLeast<CompanyWhereUniqueInput, 'id' | 'cnpj' | 'name'>;
 
     @Field(() => Int, {nullable:true})
     take?: number;

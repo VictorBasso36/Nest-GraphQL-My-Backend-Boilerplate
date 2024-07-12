@@ -23,10 +23,16 @@ CREATE TABLE "Company" (
     "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "cnpj" TEXT NOT NULL,
-    "location" TEXT NOT NULL,
+    "cnpj" TEXT,
+    "location" TEXT,
+    "description" TEXT,
+    "urlImage" TEXT,
+    "working" TEXT,
+    "approved" BOOLEAN DEFAULT false,
+    "removed" BOOLEAN DEFAULT false,
     "name" TEXT NOT NULL,
-    "rating" TEXT NOT NULL,
+    "ratingCount" INTEGER DEFAULT 0,
+    "rating" DOUBLE PRECISION,
 
     CONSTRAINT "Company_pkey" PRIMARY KEY ("id")
 );
@@ -34,12 +40,16 @@ CREATE TABLE "Company" (
 -- CreateTable
 CREATE TABLE "Comment" (
     "id" TEXT NOT NULL,
+    "title" TEXT,
+    "serviceType" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "content" TEXT NOT NULL,
-    "rating" INTEGER NOT NULL DEFAULT 0,
-    "approved" BOOLEAN NOT NULL DEFAULT false,
-    "companyId" TEXT NOT NULL,
+    "rating" DOUBLE PRECISION,
+    "approved" BOOLEAN DEFAULT false,
+    "removed" BOOLEAN DEFAULT false,
+    "companyId" TEXT,
+    "userId" TEXT,
 
     CONSTRAINT "Comment_pkey" PRIMARY KEY ("id")
 );
@@ -48,6 +58,7 @@ CREATE TABLE "Comment" (
 CREATE TABLE "CommentResponse" (
     "id" TEXT NOT NULL,
     "CommentId" TEXT NOT NULL,
+    "approved" BOOLEAN DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "content" TEXT NOT NULL,
@@ -64,11 +75,17 @@ CREATE UNIQUE INDEX "User_resetPasswordToken_key" ON "User"("resetPasswordToken"
 -- CreateIndex
 CREATE UNIQUE INDEX "Company_cnpj_key" ON "Company"("cnpj");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "Company_name_key" ON "Company"("name");
+
 -- AddForeignKey
 ALTER TABLE "User" ADD CONSTRAINT "User_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Comment" ADD CONSTRAINT "Comment_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Comment" ADD CONSTRAINT "Comment_companyId_fkey" FOREIGN KEY ("companyId") REFERENCES "Company"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Comment" ADD CONSTRAINT "Comment_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "CommentResponse" ADD CONSTRAINT "CommentResponse_CommentId_fkey" FOREIGN KEY ("CommentId") REFERENCES "Comment"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

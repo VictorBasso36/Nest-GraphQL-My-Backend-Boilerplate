@@ -34,7 +34,7 @@ export class CompanyUpdateOneWithoutUserNestedInput {
 
     @Field(() => CompanyWhereUniqueInput, {nullable:true})
     @Type(() => CompanyWhereUniqueInput)
-    connect?: Prisma.AtLeast<CompanyWhereUniqueInput, 'id' | 'cnpj'>;
+    connect?: Prisma.AtLeast<CompanyWhereUniqueInput, 'id' | 'cnpj' | 'name'>;
 
     @Field(() => CompanyUpdateToOneWithWhereWithoutUserInput, {nullable:true})
     @Type(() => CompanyUpdateToOneWithWhereWithoutUserInput)

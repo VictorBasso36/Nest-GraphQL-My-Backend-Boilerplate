@@ -19,11 +19,11 @@ export class Company {
     @Field(() => Date, {nullable:false})
     updatedAt!: Date;
 
-    @Field(() => String, {nullable:false})
-    cnpj!: string;
+    @Field(() => String, {nullable:true})
+    cnpj!: string | null;
 
-    @Field(() => String, {nullable:false})
-    location!: string;
+    @Field(() => String, {nullable:true})
+    location!: string | null;
 
     @Field(() => String, {nullable:true})
     description!: string | null;

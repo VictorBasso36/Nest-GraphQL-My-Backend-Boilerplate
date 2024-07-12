@@ -30,11 +30,11 @@ export class CompanyWhereInput {
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    cnpj?: StringFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    cnpj?: StringNullableFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    location?: StringFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    location?: StringNullableFilter;
 
     @Field(() => StringNullableFilter, {nullable:true})
     description?: StringNullableFilter;

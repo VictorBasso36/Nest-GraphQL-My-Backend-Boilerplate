@@ -18,6 +18,8 @@ import { ForgotPasswordInput, ForgotPasswordResponse } from './dto/forgot-passwo
 import { uuid } from 'uuidv4';
 import nodemailer from 'nodemailer';
 import { toAdmin } from 'src/auth/dto/signup.input';
+import { FindManyUserArgs } from 'src/@generated/user/find-many-user.args';
+import { UsersPaginatedModel } from './models/user.model';
 
 @Resolver(() => User)
 @UseGuards(GqlAuthGuard)
@@ -27,9 +29,43 @@ export class UsersResolver {
     private prisma: PrismaService,
   ) {}
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => User)
   async me(@UserEntity() user: User): Promise<User> {
     return user;
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Query(() => UsersPaginatedModel, { nullable: true })
+  async users(@Args() args: FindManyUserArgs){
+    const take = args?.take || 10;
+    const skip = args?.skip || 0;
+  
+    const totalItems = await this.prisma.user.count();
+
+    const totalPages = Math.ceil(totalItems / take);
+  
+
+    const data = await this.prisma.user.findMany({
+      ...args,
+      take,
+      skip,
+    });
+
+    const hasNextPage = (skip + take) < totalItems;
+    const hasPreviousPage = skip > 0;
+
+    return {
+      pageInfo: {
+        take,
+        hasNextPage,
+        hasPreviousPage,
+        totalPages,
+        totalItems,
+        skip,
+      },
+      nodes: data,
+    };
   }
 
   @UseGuards(GqlAuthGuard)

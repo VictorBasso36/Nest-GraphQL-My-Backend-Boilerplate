@@ -15,11 +15,11 @@ export class CompanyCreateManyInput {
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
 
-    @Field(() => String, {nullable:false})
-    cnpj!: string;
+    @Field(() => String, {nullable:true})
+    cnpj?: string;
 
-    @Field(() => String, {nullable:false})
-    location!: string;
+    @Field(() => String, {nullable:true})
+    location?: string;
 
     @Field(() => String, {nullable:true})
     description?: string;

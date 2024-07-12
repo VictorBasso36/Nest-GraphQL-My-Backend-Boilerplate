@@ -4,7 +4,6 @@ import { SortOrder } from '../prisma/sort-order.enum';
 import { SortOrderInput } from '../prisma/sort-order.input';
 import { CompanyOrderByWithRelationAndSearchRelevanceInput } from '../company/company-order-by-with-relation-and-search-relevance.input';
 import { CommentOrderByRelationAggregateInput } from '../comment/comment-order-by-relation-aggregate.input';
-import { CommentWithoutCompanyOrderByRelationAggregateInput } from '../comment-without-company/comment-without-company-order-by-relation-aggregate.input';
 import { UserOrderByRelevanceInput } from './user-order-by-relevance.input';
 
 @InputType()
@@ -48,9 +47,6 @@ export class UserOrderByWithRelationAndSearchRelevanceInput {
 
     @Field(() => CommentOrderByRelationAggregateInput, {nullable:true})
     Comment?: CommentOrderByRelationAggregateInput;
-
-    @Field(() => CommentWithoutCompanyOrderByRelationAggregateInput, {nullable:true})
-    CommentWithoutCompany?: CommentWithoutCompanyOrderByRelationAggregateInput;
 
     @Field(() => UserOrderByRelevanceInput, {nullable:true})
     _relevance?: UserOrderByRelevanceInput;

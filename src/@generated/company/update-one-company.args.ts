@@ -14,5 +14,5 @@ export class UpdateOneCompanyArgs {
 
     @Field(() => CompanyWhereUniqueInput, {nullable:false})
     @Type(() => CompanyWhereUniqueInput)
-    where!: Prisma.AtLeast<CompanyWhereUniqueInput, 'id' | 'cnpj'>;
+    where!: Prisma.AtLeast<CompanyWhereUniqueInput, 'id' | 'cnpj' | 'name'>;
 }

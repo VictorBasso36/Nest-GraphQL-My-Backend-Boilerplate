@@ -19,5 +19,5 @@ export class CompanyCreateNestedOneWithoutCommentInput {
 
     @Field(() => CompanyWhereUniqueInput, {nullable:true})
     @Type(() => CompanyWhereUniqueInput)
-    connect?: Prisma.AtLeast<CompanyWhereUniqueInput, 'id' | 'cnpj'>;
+    connect?: Prisma.AtLeast<CompanyWhereUniqueInput, 'id' | 'cnpj' | 'name'>;
 }

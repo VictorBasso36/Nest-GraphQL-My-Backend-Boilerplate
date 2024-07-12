@@ -20,11 +20,11 @@ export class CompanyOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    cnpj?: keyof typeof SortOrder;
+    @Field(() => SortOrderInput, {nullable:true})
+    cnpj?: SortOrderInput;
 
-    @Field(() => SortOrder, {nullable:true})
-    location?: keyof typeof SortOrder;
+    @Field(() => SortOrderInput, {nullable:true})
+    location?: SortOrderInput;
 
     @Field(() => SortOrderInput, {nullable:true})
     description?: SortOrderInput;

@@ -14,8 +14,6 @@ generator dbml {
 
 generator nestgraphql {
   provider = "node node_modules/prisma-nestjs-graphql"
-  // for yarn monorepos
-  // provider = "prisma-nestjs-graphql"
   output   = "../src/@generated"
 }
 
@@ -33,21 +31,20 @@ model User {
   resetPasswordExpires  DateTime?
   companyId             String?
   Comment               Comment[]
-  CommentWithoutCompany CommentWithoutCompany[]
 }
 
 model Company {
   id          String    @id @default(cuid())
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  cnpj        String    @unique
-  location    String
+  cnpj        String?   @unique
+  location    String?
   description String?
   urlImage    String?
   working     String?
   approved    Boolean?  @default(false)
   removed     Boolean?  @default(false)
-  name        String
+  name        String    @unique
   ratingCount Int?      @default(0)
   rating      Float?
   User        User[]
@@ -79,19 +76,6 @@ model CommentResponse {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   content   String
-}
-
-model CommentWithoutCompany {
-  id          String   @id @default(cuid())
-  cnpj        String
-  rating      Float?
-  title       String?
-  serviceType String?
-  content     String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  userId      String?
-  User        User?    @relation(fields: [userId], references: [id])
 }
 
 enum Role {

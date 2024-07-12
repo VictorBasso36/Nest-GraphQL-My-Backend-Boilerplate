@@ -1,37 +1,12 @@
+import { Field, ObjectType } from "@nestjs/graphql"
+import { User } from "src/@generated/user/user.model"
+import { PageInfo } from "src/common/pagination/page-info.model"
 
-// import {
-//   ObjectType,
-//   registerEnumType,
-//   HideField,
-//   Field,
-// } from '@nestjs/graphql';
-// import { IsEmail } from 'class-validator';
-// import { BaseModel } from '../../common/models/base.model';
-// import { Role } from '@prisma/client';
+@ObjectType()
+export class UsersPaginatedModel {
+  @Field(() => PageInfo, {nullable: true})
+  pageInfo: PageInfo;
 
-// registerEnumType(Role, {
-//   name: 'Role',
-//   description: 'User role',
-// });
-
-// @ObjectType()
-// export class User extends BaseModel {
-//   @Field()
-//   @IsEmail()
-//   email: string;
-
-//   @Field(() => String, { nullable: true })
-//   firstname?: string;
-
-//   @Field(() => String, { nullable: true })
-//   lastname?: string;
-
-//   @Field(() => Role)
-//   role: Role;
-
-//   // @Field(() => [Post], { nullable: true })
-//   // posts?: [Post] | null;
-
-//   @HideField()
-//   password: string;
-// }
+  @Field(() => [User])
+  nodes: [User];
+}

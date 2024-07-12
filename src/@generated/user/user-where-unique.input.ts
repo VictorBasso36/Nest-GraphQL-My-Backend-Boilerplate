@@ -8,7 +8,6 @@ import { EnumRoleFilter } from '../prisma/enum-role-filter.input';
 import { DateTimeNullableFilter } from '../prisma/date-time-nullable-filter.input';
 import { CompanyNullableRelationFilter } from '../company/company-nullable-relation-filter.input';
 import { CommentListRelationFilter } from '../comment/comment-list-relation-filter.input';
-import { CommentWithoutCompanyListRelationFilter } from '../comment-without-company/comment-without-company-list-relation-filter.input';
 
 @InputType()
 export class UserWhereUniqueInput {
@@ -60,7 +59,4 @@ export class UserWhereUniqueInput {
 
     @Field(() => CommentListRelationFilter, {nullable:true})
     Comment?: CommentListRelationFilter;
-
-    @Field(() => CommentWithoutCompanyListRelationFilter, {nullable:true})
-    CommentWithoutCompany?: CommentWithoutCompanyListRelationFilter;
 }

@@ -2,7 +2,6 @@ import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { CompanyWhereInput } from './company-where.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
-import { StringFilter } from '../prisma/string-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 import { BoolNullableFilter } from '../prisma/bool-nullable-filter.input';
 import { IntNullableFilter } from '../prisma/int-nullable-filter.input';
@@ -19,6 +18,9 @@ export class CompanyWhereUniqueInput {
     @Field(() => String, {nullable:true})
     cnpj?: string;
 
+    @Field(() => String, {nullable:true})
+    name?: string;
+
     @Field(() => [CompanyWhereInput], {nullable:true})
     AND?: Array<CompanyWhereInput>;
 
@@ -34,8 +36,8 @@ export class CompanyWhereUniqueInput {
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;
 
-    @Field(() => StringFilter, {nullable:true})
-    location?: StringFilter;
+    @Field(() => StringNullableFilter, {nullable:true})
+    location?: StringNullableFilter;
 
     @Field(() => StringNullableFilter, {nullable:true})
     description?: StringNullableFilter;
@@ -51,9 +53,6 @@ export class CompanyWhereUniqueInput {
 
     @Field(() => BoolNullableFilter, {nullable:true})
     removed?: BoolNullableFilter;
-
-    @Field(() => StringFilter, {nullable:true})
-    name?: StringFilter;
 
     @Field(() => IntNullableFilter, {nullable:true})
     ratingCount?: IntNullableFilter;

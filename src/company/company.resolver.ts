@@ -10,7 +10,6 @@ import {
 
 import { CompanyCreateInput } from 'src/@generated/company/company-create.input';
 import { UpdateOneCompanyArgs } from 'src/@generated/company/update-one-company.args';
-import {  } from './models/find-many.model';
 import { FindUniqueCompanyArgs } from 'src/@generated/company/find-unique-company.args';
 import { Company } from '../@generated/company/company.model';
 import { CompanyPaginatedModel } from './models/find-many.model';
@@ -45,6 +44,9 @@ export class CompanyResolver {
 
     const data = await this.prisma.company.findMany({
       ...args,
+      include: {
+        User: true
+      },
       take,
       skip,
     });
@@ -100,14 +102,11 @@ export class CompanyResolver {
         User: true
       }
     }) 
-    console.log(user?.companyId)
-
-    console.log(company?.id)
 
     if(user?.companyId !== company?.id) {
       if(user?.role !== 'ADMIN') throw 'esse usuario nn pertence a essa empresa'
     }
-    console.log('this',data?.data?.approved)
+    
     return await this.prisma.company.update({
       data: {
         ...data?.data,

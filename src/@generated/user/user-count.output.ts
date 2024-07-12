@@ -7,7 +7,4 @@ export class UserCount {
 
     @Field(() => Int, {nullable:false})
     Comment?: number;
-
-    @Field(() => Int, {nullable:false})
-    CommentWithoutCompany?: number;
 }
