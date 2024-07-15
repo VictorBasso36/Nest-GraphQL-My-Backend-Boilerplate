@@ -6,7 +6,7 @@ import {
   Mutation,
 } from '@nestjs/graphql';
 import { GqlAuthGuard } from 'src/auth/gql-auth.guard';
-import { UseGuards } from '@nestjs/common';
+import { ConflictException, UseGuards } from '@nestjs/common';
 import { CommentCreateInput } from 'src/@generated/comment/comment-create.input';
 import { UpdateOneCommentArgs } from 'src/@generated/comment/update-one-comment.args';
 import { FindManyCommentArgs } from 'src/@generated/comment/find-many-comment.args';
@@ -69,7 +69,10 @@ export class CommentResolver {
   @Mutation(() => Comment, {name: 'createComment'})
   async createComment(@Args('data') data: CommentCreateInput) {
 
-    //get company
+    if(!data?.serviceType) throw new ConflictException(`você não enviou o tipo de serviço.`);
+    if(!data?.content) throw new ConflictException(`você não a descrição do serviço prestado.`);
+    if(!data?.title) throw new ConflictException(`você não enviou o título da avaliação.`);
+  
     const company = await this.prisma.company.findUniqueOrThrow({
       where: {
         id: data?.Company?.connect?.id

@@ -15,7 +15,7 @@ import { Company } from '../@generated/company/company.model';
 import { CompanyPaginatedModel } from './models/find-many.model';
 import { FindManyCompanyArgs } from 'src/@generated/company/find-many-company.args';
 import { GqlAuthGuard } from 'src/auth/gql-auth.guard';
-import { UseGuards } from '@nestjs/common';
+import { ConflictException, UseGuards } from '@nestjs/common';
 import { UserEntity } from 'src/common/decorators/user.decorator';
 import { User } from 'src/@generated/user/user.model';
 
@@ -82,6 +82,7 @@ export class CompanyResolver {
   @UseGuards(GqlAuthGuard)
   @Mutation(() => Company, {name: 'createCompany'})
   async createCompony(@Args('data') data: CompanyCreateInput) {
+    if(!data?.name) throw new ConflictException(`você não o nome da empresa.`);
     return await this.prisma.company.create({
       data: {
         ...data,
@@ -104,7 +105,9 @@ export class CompanyResolver {
     }) 
 
     if(user?.companyId !== company?.id) {
-      if(user?.role !== 'ADMIN') throw 'esse usuario nn pertence a essa empresa'
+      console.log('this')
+      console.log(user?.role)
+      if(user?.role !== 'ADMIN') return null
     }
     
     return await this.prisma.company.update({
