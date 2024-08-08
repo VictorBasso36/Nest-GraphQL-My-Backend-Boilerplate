@@ -33,9 +33,7 @@ export class CompanyResolver {
     const skip = args?.skip || 0;
   
     const totalItems = await this.prisma.company.count({
-      where: {
-        approved: args?.where?.approved ? args?.where?.approved : undefined,
-      }
+      where: args.where
     });
   
 
