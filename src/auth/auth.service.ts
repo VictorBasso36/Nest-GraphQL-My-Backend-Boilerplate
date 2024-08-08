@@ -45,7 +45,7 @@ export class AuthService {
         e instanceof Prisma.PrismaClientKnownRequestError &&
         e.code === 'P2002'
       ) {
-        throw new ConflictException(`Email ${payload.email} Já está sendo usado.`);
+        throw new ConflictException(`Email ${payload.email} já está sendo usado.`);
       }
       //@ts-ignore
       throw new Error(e);

@@ -34,7 +34,7 @@ export class CompanyResolver {
   
     const totalItems = await this.prisma.company.count({
       where: {
-        approved: true
+        approved: args?.where?.approved ? args?.where?.approved : undefined,
       }
     });
   

@@ -72,7 +72,7 @@ export class CommentResolver {
     if(!data?.serviceType) throw new ConflictException(`você não enviou o tipo de serviço.`);
     if(!data?.content) throw new ConflictException(`você não a descrição do serviço prestado.`);
     if(!data?.title) throw new ConflictException(`você não enviou o título da avaliação.`);
-  
+    
     const company = await this.prisma.company.findUniqueOrThrow({
       where: {
         id: data?.Company?.connect?.id
