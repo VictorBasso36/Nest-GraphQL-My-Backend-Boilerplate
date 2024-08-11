@@ -10,6 +10,7 @@ export enum CommentScalarFieldEnum {
     rating = "rating",
     approved = "approved",
     removed = "removed",
+    resolved = "resolved",
     companyId = "companyId",
     userId = "userId"
 }

@@ -4,7 +4,7 @@ import {
   Query,
   Args,
   Mutation,
-} from '@nestjs/graphql';
+} from '@nestjs/graphql'
 import { GqlAuthGuard } from 'src/auth/gql-auth.guard';
 import { ConflictException, UseGuards } from '@nestjs/common';
 import { CommentCreateInput } from 'src/@generated/comment/comment-create.input';
@@ -34,18 +34,19 @@ export class CommentResolver {
   
 
     const data = await this.prisma.comment.findMany({
-      ...args,
+      where: args?.where,
       take,
       skip,
+      orderBy: args?.orderBy,
+      cursor: args?.cursor,
       include: {
         Company: true,
+        CommentResponse: true,
         User: {
           include: {
             Company: true
           },
-          
         }
-
       }
     });
 
@@ -90,6 +91,7 @@ export class CommentResolver {
       data: {
         ratingCount: company?.ratingCount + 1,
         rating: newAverageRating 
+        
       }
     })
 

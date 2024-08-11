@@ -38,6 +38,9 @@ export class CommentUpdateWithoutUserInput {
     @Field(() => NullableBoolFieldUpdateOperationsInput, {nullable:true})
     removed?: NullableBoolFieldUpdateOperationsInput;
 
+    @Field(() => NullableBoolFieldUpdateOperationsInput, {nullable:true})
+    resolved?: NullableBoolFieldUpdateOperationsInput;
+
     @Field(() => CompanyUpdateOneWithoutCommentNestedInput, {nullable:true})
     Company?: CompanyUpdateOneWithoutCommentNestedInput;
 

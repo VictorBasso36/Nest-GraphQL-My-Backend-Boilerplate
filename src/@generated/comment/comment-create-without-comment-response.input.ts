@@ -34,6 +34,9 @@ export class CommentCreateWithoutCommentResponseInput {
     @Field(() => Boolean, {nullable:true})
     removed?: boolean;
 
+    @Field(() => Boolean, {nullable:true})
+    resolved?: boolean;
+
     @Field(() => CompanyCreateNestedOneWithoutCommentInput, {nullable:true})
     Company?: CompanyCreateNestedOneWithoutCommentInput;
 

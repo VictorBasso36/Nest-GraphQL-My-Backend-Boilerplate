@@ -49,6 +49,9 @@ export class CommentWhereUniqueInput {
     @Field(() => BoolNullableFilter, {nullable:true})
     removed?: BoolNullableFilter;
 
+    @Field(() => BoolNullableFilter, {nullable:true})
+    resolved?: BoolNullableFilter;
+
     @Field(() => StringNullableFilter, {nullable:true})
     companyId?: StringNullableFilter;
 

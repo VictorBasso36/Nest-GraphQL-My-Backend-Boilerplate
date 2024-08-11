@@ -45,6 +45,9 @@ export class CommentScalarWhereWithAggregatesInput {
     @Field(() => BoolNullableWithAggregatesFilter, {nullable:true})
     removed?: BoolNullableWithAggregatesFilter;
 
+    @Field(() => BoolNullableWithAggregatesFilter, {nullable:true})
+    resolved?: BoolNullableWithAggregatesFilter;
+
     @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
     companyId?: StringNullableWithAggregatesFilter;
 

@@ -33,6 +33,9 @@ export class CommentMinOrderByAggregateInput {
     removed?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    resolved?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     companyId?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})

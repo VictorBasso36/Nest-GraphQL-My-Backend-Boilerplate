@@ -46,6 +46,7 @@ Table Comment {
   rating Float
   approved Boolean [default: false]
   removed Boolean [default: false]
+  resolved Boolean
   companyId String
   Company Company
   userId String

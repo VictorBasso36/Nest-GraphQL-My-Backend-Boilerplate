@@ -45,6 +45,7 @@ export class CompanyResolver {
       include: {
         User: true
       },
+    
       take,
       skip,
     });
@@ -72,7 +73,10 @@ export class CompanyResolver {
         include: {
           User: true
         },
-        where: args.where
+        where: {
+          ...args.where,
+          
+        }
       }
     )
   }
@@ -117,5 +121,4 @@ export class CompanyResolver {
       where: data?.where
     });
   }
-  
 }

@@ -32,6 +32,9 @@ export class CommentCreateManyUserInput {
     @Field(() => Boolean, {nullable:true})
     removed?: boolean;
 
+    @Field(() => Boolean, {nullable:true})
+    resolved?: boolean;
+
     @Field(() => String, {nullable:true})
     companyId?: string;
 }

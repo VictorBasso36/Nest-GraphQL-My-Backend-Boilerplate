@@ -33,6 +33,9 @@ export class CommentCountAggregate {
     removed!: number;
 
     @Field(() => Int, {nullable:false})
+    resolved!: number;
+
+    @Field(() => Int, {nullable:false})
     companyId!: number;
 
     @Field(() => Int, {nullable:false})

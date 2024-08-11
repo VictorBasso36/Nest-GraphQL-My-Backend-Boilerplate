@@ -61,6 +61,7 @@ model Comment {
   rating          Float?
   approved        Boolean?          @default(false)
   removed         Boolean?          @default(false)
+  resolved        Boolean?
   companyId       String?
   Company         Company?          @relation(fields: [companyId], references: [id])
   userId          String?

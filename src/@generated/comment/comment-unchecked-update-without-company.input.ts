@@ -37,6 +37,9 @@ export class CommentUncheckedUpdateWithoutCompanyInput {
     @Field(() => NullableBoolFieldUpdateOperationsInput, {nullable:true})
     removed?: NullableBoolFieldUpdateOperationsInput;
 
+    @Field(() => NullableBoolFieldUpdateOperationsInput, {nullable:true})
+    resolved?: NullableBoolFieldUpdateOperationsInput;
+
     @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
     userId?: NullableStringFieldUpdateOperationsInput;
 

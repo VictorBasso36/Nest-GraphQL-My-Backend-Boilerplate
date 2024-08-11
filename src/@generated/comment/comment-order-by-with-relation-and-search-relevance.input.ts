@@ -38,6 +38,9 @@ export class CommentOrderByWithRelationAndSearchRelevanceInput {
     removed?: SortOrderInput;
 
     @Field(() => SortOrderInput, {nullable:true})
+    resolved?: SortOrderInput;
+
+    @Field(() => SortOrderInput, {nullable:true})
     companyId?: SortOrderInput;
 
     @Field(() => SortOrderInput, {nullable:true})

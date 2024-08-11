@@ -37,6 +37,9 @@ export class Comment {
     @Field(() => Boolean, {nullable:true,defaultValue:false})
     removed!: boolean | null;
 
+    @Field(() => Boolean, {nullable:true})
+    resolved!: boolean | null;
+
     @Field(() => String, {nullable:true})
     companyId!: string | null;
 

@@ -55,12 +55,12 @@ export class CommentResponseResolver {
   }
 
   @UseGuards(GqlAuthGuard)
-  @Mutation(() => CommentResponse, {name: 'createComment'})
+  @Mutation(() => CommentResponse, {name: 'createCommentResponse', nullable: true})
   async createCommentResponse(@Args('data') data: CommentResponseCreateInput) {
     return await this.prisma.commentResponse.create({
       data: {
         ...data,
-        approved: false
+        approved: true
       },
     });
   }

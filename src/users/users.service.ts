@@ -45,32 +45,4 @@ export class UsersService {
       where: { id: userId },
     });
   }
-
-  // async resetPassword(email: string, token: string, newPassword: string) {
-  //   // Verifique se o token é válido e ainda não expirou
-  //   const user = await this.prisma.user.findFirst({
-  //     where: {
-  //       resetPasswordToken: token,
-  //       resetPasswordExpires: {
-  //         gt: new Date(),
-  //       },
-  //     },
-  //   });
-
-  //   if (!user) {
-  //     throw new BadRequestException('Token de redefinição de senha inválido ou expirado.');
-  //   }
-
-  //   // Atualize a senha do usuário
-  //   const hashedPassword = await this.passwordService.hashPassword(newPassword);
-
-  //   await this.prisma.user.update({
-  //     where: { email: email },
-  //     data: {
-  //       password: hashedPassword,
-  //       resetPasswordToken: null, // Limpe o token de redefinição de senha
-  //       resetPasswordExpires: null, // Limpe a data de validade
-  //     },
-  //   });
-  // }
 }
