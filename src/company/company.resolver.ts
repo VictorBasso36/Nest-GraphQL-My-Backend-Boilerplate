@@ -107,8 +107,6 @@ export class CompanyResolver {
     }) 
 
     if(user?.companyId !== company?.id) {
-      console.log('this')
-      console.log(user?.role)
       if(user?.role !== 'ADMIN') return null
     }
     

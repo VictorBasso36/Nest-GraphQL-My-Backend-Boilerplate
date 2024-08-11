@@ -17,8 +17,6 @@ export class PasswordService {
   constructor(private configService: ConfigService) {}
 
   validatePassword(password: string, hashedPassword: string): Promise<boolean> {
-    console.log('pass',password)
-    console.log('hashedPassword',hashedPassword)
     return compare(password, hashedPassword);
   }
 
