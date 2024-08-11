@@ -18,6 +18,8 @@ import { GqlAuthGuard } from 'src/auth/gql-auth.guard';
 import { ConflictException, UseGuards } from '@nestjs/common';
 import { UserEntity } from 'src/common/decorators/user.decorator';
 import { User } from 'src/@generated/user/user.model';
+import { CountersModels } from './models/company-counters.model';
+import { InputCompanyCounters } from './models/input-company-counters.input';
 
 @Resolver(() => Company)
 export class CompanyResolver {
@@ -79,6 +81,57 @@ export class CompanyResolver {
         }
       }
     )
+  }
+
+  @Query(() => CountersModels, {nullable: true, name: 'companyCounters'})
+  async getCountersCompany(@Args() args: FindUniqueCompanyArgs){
+    
+    const ratingCount = await this.prisma.comment.count({
+      where: {
+        approved: true,
+        companyId: args?.where?.id
+      }
+    })
+
+
+    const resolvedRatingCount = await this.prisma.comment.count({
+      where: {
+        approved: true,
+        resolved: true,
+        companyId: args?.where?.id,
+        CommentResponse: {
+          every: {}
+        }
+      }
+    })
+
+    const notresolvedRatingCount = await this.prisma.comment.count({
+      where: {
+        approved: true,
+        resolved: false,
+        companyId: args?.where?.id,
+        CommentResponse: {
+          every: {}
+        }
+      }
+    })
+
+    const ratingNoResponse = await this.prisma.comment.count({
+      where: {
+        companyId: args?.where?.id,
+        CommentResponse: {
+          none: {}
+        }
+      }
+    })
+
+    return {
+     
+      ratingCount: ratingCount || 0,
+      resolvedRatingCount: resolvedRatingCount || 0,
+      notresolvedRatingCount: notresolvedRatingCount || 0,
+      ratingNoResponse: ratingNoResponse || 0,
+    }
   }
 
   @UseGuards(GqlAuthGuard)

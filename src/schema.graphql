@@ -947,6 +947,13 @@ input CompanyWhereUniqueInput {
   working: StringNullableFilter
 }
 
+type CountersModels {
+  notresolvedRatingCount: Int!
+  ratingCount: Int!
+  ratingNoResponse: Int!
+  resolvedRatingCount: Int!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -1178,6 +1185,7 @@ type PageInfo {
 type Query {
   CommentResponses(cursor: CommentResponseWhereUniqueInput, distinct: [CommentResponseScalarFieldEnum!], orderBy: [CommentResponseOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CommentResponseWhereInput): CommentResponsePaginatedModel
   comments(cursor: CommentWhereUniqueInput, distinct: [CommentScalarFieldEnum!], orderBy: [CommentOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CommentWhereInput): CommentPaginatedModel
+  companyCounters(where: CompanyWhereUniqueInput!): CountersModels
   companys(cursor: CompanyWhereUniqueInput, distinct: [CompanyScalarFieldEnum!], orderBy: [CompanyOrderByWithRelationAndSearchRelevanceInput!], skip: Int, take: Int, where: CompanyWhereInput): CompanyPaginatedModel
   findUniqueCompany(where: CompanyWhereUniqueInput!): Company
   hello(name: String!): String!
