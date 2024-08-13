@@ -45,8 +45,9 @@ export class CompanyResolver {
     const data = await this.prisma.company.findMany({
       ...args,
       include: {
-        User: true
+        User: true,
       },
+      
     
       take,
       skip,
@@ -55,13 +56,6 @@ export class CompanyResolver {
 
     const hasNextPage = (skip + take) < totalItems;
     const hasPreviousPage = skip > 0;
-
-    const ratingCount = await this.prisma.comment.count({
-      where: {
-        approved: true,
-        companyId: args?.where?.id
-      }
-    })
 
     return {
       pageInfo: {
@@ -72,10 +66,7 @@ export class CompanyResolver {
         totalItems,
         skip,
       },
-      nodes: {
-        ...data,
-        ratingCount
-      },
+      nodes: data,
     };
   }
 
