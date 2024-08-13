@@ -171,14 +171,14 @@ export class CompanyResolver {
     }) 
 
     if(user?.companyId !== company?.id) {
-      if(user?.role !== 'ADMIN') return null
+      if(user?.role !== 'ADMIN') { 
+        return company 
+      }
     }
     
     return await this.prisma.company.update({
       data: {
         ...data?.data,
-        rating: company?.rating,
-        ratingCount: company?.ratingCount,
       },
       where: data?.where
     });
