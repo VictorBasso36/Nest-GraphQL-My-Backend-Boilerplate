@@ -6,6 +6,8 @@ import {
   Mutation,
   ObjectType,
   Field,
+  ResolveField,
+  Parent,
 } from '@nestjs/graphql';
 
 import { CompanyCreateInput } from 'src/@generated/company/company-create.input';
@@ -83,6 +85,12 @@ export class CompanyResolver {
         }
       }
     )
+  }
+
+  @ResolveField(() => CountersModels, {nullable: true, name:'counters'})
+  async getCounter(@Parent() company: Company) {
+    const id = company.id;
+    return this.getCountersCompany({ where: { id } });
   }
 
   @Query(() => CountersModels, {nullable: true, name: 'companyCounters'})

@@ -658,6 +658,7 @@ type Company {
   _count: CompanyCount!
   approved: Boolean
   cnpj: String
+  counters: CountersModels
   createdAt: DateTime!
   description: String
   id: ID!
