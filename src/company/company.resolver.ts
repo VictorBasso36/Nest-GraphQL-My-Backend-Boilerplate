@@ -119,6 +119,7 @@ export class CompanyResolver {
     const ratingNoResponse = await this.prisma.comment.count({
       where: {
         companyId: args?.where?.id,
+        approved: true,
         CommentResponse: {
           none: {}
         }
