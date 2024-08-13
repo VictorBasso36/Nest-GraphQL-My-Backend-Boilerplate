@@ -52,8 +52,16 @@ export class CompanyResolver {
       skip,
     });
 
+
     const hasNextPage = (skip + take) < totalItems;
     const hasPreviousPage = skip > 0;
+
+    const ratingCount = await this.prisma.comment.count({
+      where: {
+        approved: true,
+        companyId: args?.where?.id
+      }
+    })
 
     return {
       pageInfo: {
@@ -64,7 +72,10 @@ export class CompanyResolver {
         totalItems,
         skip,
       },
-      nodes: data,
+      nodes: {
+        ...data,
+        ratingCount
+      },
     };
   }
 
