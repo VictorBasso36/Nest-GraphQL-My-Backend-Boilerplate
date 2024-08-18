@@ -73,27 +73,6 @@ export class CommentResolver {
     if(!data?.serviceType) throw new ConflictException(`você não enviou o tipo de serviço.`);
     if(!data?.content) throw new ConflictException(`você não a descrição do serviço prestado.`);
     if(!data?.title) throw new ConflictException(`você não enviou o título da avaliação.`);
-    
-    const company = await this.prisma.company.findUniqueOrThrow({
-      where: {
-        id: data?.Company?.connect?.id
-      }
-    })
-
-    let newRating = data?.rating; 
-
-    let newAverageRating = ((company?.rating * company?.ratingCount) + newRating) / (company?.ratingCount + 1);
-
-    await this.prisma.company.update({
-      where: {
-        id: data?.Company?.connect?.id
-      },
-      data: {
-        ratingCount: company?.ratingCount + 1,
-        rating: newAverageRating 
-        
-      }
-    })
 
     const comment = await this.prisma.comment.create({
       data: {
@@ -113,11 +92,7 @@ export class CommentResolver {
       }
     })
 
-    const companyId = commentandcompany?.companyId
-    const commentId = comment?.id
     const ownerCommentUser = commentandcompany?.User?.email
-
-    const resetPasswordUrl = `${process.env.APPDOMAIN}/empresa/${companyId}?commentid=${commentId}`;
 
     const transporter = nodemailer.createTransport({
       service: "Gmail",
