@@ -137,8 +137,6 @@ export class CommentResolver {
       html: `
         <p>A Equipe Reclame Solar notificará a empresa sobre sua avaliação: "${commentandcompany?.title}"</p>
         <p>Conte conosco!</p>
-        <a href="${resetPasswordUrl}">Clique aqui</a>
-        <p>ou Acesse: ${resetPasswordUrl} para acompanhar seu caso.</p>
       `,
     };
 
