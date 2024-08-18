@@ -203,6 +203,5 @@ export class CommentResolver {
       data: data?.data,
       where: data?.where
     });
-  }
-  
+  }  
 }

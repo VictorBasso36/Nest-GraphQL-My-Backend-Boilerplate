@@ -13,6 +13,8 @@ import { GqlConfigService } from './gql-config.service';
 import { CompanyModule } from './company/company.module';
 import { CommentModule } from './comment/comment.module';
 import { CommentResponseModule } from './comment-response/comment-response.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksModule } from './tasks/task.module';
 
 @Module({
   imports: [
@@ -40,6 +42,8 @@ import { CommentResponseModule } from './comment-response/comment-response.modul
     UsersModule,
     CommentResponseModule,
     CommentModule,
+    ScheduleModule.forRoot(),
+    TasksModule
 
   ],
   controllers: [AppController],
