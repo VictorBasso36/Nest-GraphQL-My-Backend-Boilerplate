@@ -61,6 +61,7 @@
     "@nestjs/jwt": "10.1.0",
     "@nestjs/passport": "10.0.0",
     "@nestjs/platform-express": "10.1.0",
+    "@nestjs/schedule": "^4.1.0",
     "@nestjs/swagger": "7.1.2",
     "@prisma/client": "5.14.0",
     "@prisma/generator-helper": "5.14.0",
