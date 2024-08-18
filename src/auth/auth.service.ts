@@ -13,6 +13,7 @@ import { PasswordService } from './password.service';
 import { SignupInput } from './dto/signup.input';
 import { Token } from './models/token.model';
 import { SecurityConfig } from '../common/configs/config.interface';
+import * as nodemailer from 'nodemailer';
 
 @Injectable()
 export class AuthService {
@@ -36,6 +37,38 @@ export class AuthService {
           role: 'USER',
         },
       });
+
+      if(user){
+
+        const resetPasswordUrl = `${process.env.APPDOMAIN}/login?email=${user?.email}`;
+  
+        const transporter = nodemailer.createTransport({
+          service: "Gmail",
+          host: "smtp.gmail.com",
+          port: 465,
+          secure: true,
+          auth: {
+            user: process.env.SMTP_EMAIL,
+            pass: process.env.SMTP_PASS,
+          },
+        });
+      
+        const mailOptions = {
+          from: process.env.SMTP_EMAIL,
+          to: user?.email,
+          subject: `${process.env.APPNAME} - Parabéns! Seu cadastro no Reclame Solar foi efetivado com sucesso.`,
+          html: `
+            <p>Seus dados de acesso são:</p>
+            <a href="${resetPasswordUrl}">Clique aqui</a>
+            <p>ou Acesse: reclamesolar.com e faça suas avaliações de empresas supridoras da cadeia da energia solar e encontre os melhores fornecedores. Se precisar de suporte envie para o e-mail contato@energes.com.br. Conte conosco!</p>
+          `,
+        };
+  
+
+       await transporter.sendMail(mailOptions);
+
+      }
+    
 
       return this.generateTokens({
         userId: user.id,
